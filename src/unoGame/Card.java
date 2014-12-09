@@ -1,38 +1,40 @@
 package unoGame;
 
-import java.awt.Color;
-
 public class Card {
-	private CardType cardType; //red, blue, green, yellow, WILD
-	private int number; // 0- 9
-	
-	public Card(CardType cardType, int number){
-		this.cardType = cardType;
+
+	final static int SKIP = 10;
+	final static int REVERSE = 11;
+	final static int DRAWTWO = 12;
+	final static int DRAWFOUR = 13;
+	final static int WILD = 14;
+
+	private CardColor cardColor; // red, blue, green, yellow
+	private int number; // 0 - 14
+
+	public Card(CardColor cardColor, int number) {
+		this.cardColor = cardColor;
 		this.number = number;
 	}
 
-	public CardType getType() {
-		return cardType;
+	public CardColor getType() {
+		return cardColor;
 	}
-
 
 	public int getNumber() {
 		return number;
 	}
 
-	
-	
 	@Override
 	public String toString() {
-		return "Card [cardType=" + cardType + ", number=" + number + "]";
+		return "Card [cardType=" + cardColor + ", number=" + number + "]";
 	}
 
-	public boolean canPlay(Card otherCard){
-		if(number > otherCard.getNumber()){
+	public boolean canPlay(Card otherCard) {
+		if (number > otherCard.getNumber()) {
 			return true;
-		}else if(otherCard.getType() == CardType.WILD){
+		} else if (otherCard.getNumber() == WILD) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
