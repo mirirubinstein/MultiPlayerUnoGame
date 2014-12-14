@@ -3,20 +3,17 @@ package unoGame;
 import java.awt.Color;
 
 public enum CardColor {
-	RED(Color.RED),
-	YELLOW(Color.YELLOW),
-	GREEN(Color.GREEN),
-	BLUE(Color.BLUE);
-	
+	RED(Color.RED), YELLOW(Color.YELLOW), GREEN(Color.GREEN), BLUE(Color.BLUE), WILD(
+			Color.BLACK);
+
 	private final Color color;
-	
-	private CardColor(Color color){
+
+	private CardColor(Color color) {
 		this.color = color;
 	}
-	public Color getColor(){
+
+	public Color getColor() {
 		return color;
 	}
-	
-	
 
 }

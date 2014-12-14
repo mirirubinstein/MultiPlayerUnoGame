@@ -12,20 +12,20 @@ public class Deck {
 		// set up deck
 		cards = new ArrayList<Card>(CARDS_IN_DECK);
 
-		for (int i = 0; i < CardColor.values().length; i++) {
+		for (int i = 0; i < CardColor.values().length - 1; i++) {
 			// 1 card in each color for number 0
 			cards.add(new Card(CardColor.values()[i], 0));
 		}
 
-		for (int j = 0; j < CardColor.values().length; j++) {
-			for (int k = 0; k < Card.SKIP; k++) {
+		for (int j = 0; j < CardColor.values().length - 1; j++) {
+			for (int k = 1; k < Card.SKIP; k++) {
 				cards.add(new Card(CardColor.values()[j], k));
 				cards.add(new Card(CardColor.values()[j], k));
 				// 2 cards in each color for all numbers 1-9
 			}
 		}
 
-		for (int j = 0; j < CardColor.values().length; j++) {
+		for (int j = 0; j < CardColor.values().length - 1; j++) {
 			for (int k = Card.SKIP; k < Card.DRAWFOUR; k++) {
 				cards.add(new Card(CardColor.values()[j], k));
 				cards.add(new Card(CardColor.values()[j], k));
@@ -33,10 +33,12 @@ public class Deck {
 			}
 		}
 
-		// these special cards won't be identified by color, since don't want to add color.black as enum value, don't want to iterate when creating rest of deck
-		for (int j = 0; j < CardColor.values().length; j++) {
+		// these special cards won't be identified by color, since don't want to
+		// add color.black as enum value, don't want to iterate when creating
+		// rest of deck
+		for (int j = 0; j < CardColor.values().length - 1; j++) {
 			for (int k = Card.DRAWFOUR; k <= Card.WILD; k++) {
-				cards.add(new Card(CardColor.values()[j], k));
+				cards.add(new Card(CardColor.values()[4], k));
 				// 4 cards for drawFour, wild
 			}
 		}
@@ -55,7 +57,7 @@ public class Deck {
 	}
 
 	// boolean hasNext
-	public boolean hasNext(){
+	public boolean hasNext() {
 		return cards.get(cards.size() - 1) != null;
 	}
 
@@ -69,10 +71,15 @@ public class Deck {
 	}
 
 	public String toString() {
-		String data = "\nDeck";
+		StringBuilder data = new StringBuilder("\nDeck");
 		for (int i = 0; i < cards.size(); i++) {
-			data += cards.get(i).toString();
+			data.append("\n");
+			data.append(cards.get(i).toString());
 		}
-		return data;
+		return data.toString();
+	}
+
+	public int getLength() {
+		return cards.size();
 	}
 }

@@ -5,7 +5,7 @@ public class Card {
 	final static int SKIP = 10;
 	final static int REVERSE = 11;
 	final static int DRAWTWO = 12;
-	final static int DRAWFOUR = 13;
+	final static int DRAWFOUR = 13; // wild draw four
 	final static int WILD = 14;
 
 	private CardColor cardColor; // red, blue, green, yellow
@@ -16,7 +16,7 @@ public class Card {
 		this.number = number;
 	}
 
-	public CardColor getType() {
+	public CardColor getColor() {
 		return cardColor;
 	}
 
