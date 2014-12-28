@@ -14,6 +14,10 @@ public class Player {
 		return hand.remove(c);
 	}
 
+	public Card seeThisCardFromHand(int c) {
+		return hand.get(c);
+	}
+
 	public void pickCard(Card c) {
 		// receives a card and puts it into the hand after all the cards.
 		hand.add(c);
@@ -24,3 +28,4 @@ public class Player {
 	}
 
 }
+

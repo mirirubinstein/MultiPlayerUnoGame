@@ -62,7 +62,7 @@ public class Deck {
 	}
 
 	// deal top card
-	public Card dealCard() {
+	public Card dealCard(){
 		return cards.remove(cards.size() - 1);
 	}
 

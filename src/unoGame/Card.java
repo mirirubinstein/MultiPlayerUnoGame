@@ -8,7 +8,7 @@ public class Card {
 	final static int DRAWFOUR = 13; // wild draw four
 	final static int WILD = 14;
 
-	private CardColor cardColor; // red, blue, green, yellow
+	private CardColor cardColor; // red, blue, green, yellow, black
 	private int number; // 0 - 14
 
 	public Card(CardColor cardColor, int number) {
@@ -30,11 +30,13 @@ public class Card {
 	}
 
 	public boolean canPlay(Card otherCard) {
-		if (number > otherCard.getNumber()) {
+		if(cardColor == otherCard.getColor()){
 			return true;
-		} else if (otherCard.getNumber() == WILD) {
+		}else if(number == otherCard.getNumber()){
+			return true;			
+		}else if(number == 14){
 			return true;
-		} else {
+		}else{
 			return false;
 		}
 	}

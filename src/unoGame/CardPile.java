@@ -19,13 +19,13 @@ public class CardPile {
 		elements.add(newItem);
 	}
 
-	public Card pop() throws EmptyPileException {
+	/*public Card pop() throws EmptyPileException {
 		if (isEmpty()) {
 			throw new EmptyPileException("Pile is empty, can not pop");
 		} else {
 			return elements.remove(elements.size() - 1);
 		}
-	}
+	}*/
 
 	public Card peek() throws EmptyPileException {
 		if (isEmpty()) {
