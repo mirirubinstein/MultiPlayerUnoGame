@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Deck {
-	List<Card> cards;
+	private List<Card> cards;
 	final static int CARDS_IN_DECK = 108;
 
 	public Deck() {
@@ -63,11 +63,17 @@ public class Deck {
 
 	// deal top card
 	public Card dealCard(){
-		return cards.remove(cards.size() - 1);
+		Card card  = cards.remove(cards.size() - 1);
+		return card;
+		
+	}
+	public void resetDeck(List<Card> pile){
+		cards = pile;
 	}
 
 	public boolean isEmpty() {
-		return cards.size() == 0;
+		//cant wait till its 0 in case someone has a draw 4
+		return cards.size() == 4;
 	}
 
 	public String toString() {

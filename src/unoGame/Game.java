@@ -7,7 +7,7 @@ public class Game {
 										// THIS
 	// max number of players should be 5
 	private Player players[] = new Player[NUM_PLAYERS];
-	private static Deck deck = new Deck();// pick from here and when empty
+	private static Deck deck = new Deck();// pick from here and when empty 
 	private static CardPile playingPile = new CardPile();
 
 	private int turn;
@@ -21,6 +21,7 @@ public class Game {
 		nextPlayerSkip = false;
 		reverse = false;
 		gameOver = false;
+		//deck.shuffle();
 		
 		for (int i = 0; i < NUM_PLAYERS; i++) {
 			players[i] = new Player(); // construct each new player in the array
@@ -39,10 +40,11 @@ public class Game {
 			// number card.
 		} while ((deck.dealCard().getColor().equals(Color.BLACK))
 				|| (deck.dealCard().getNumber() > 9));
-		
+		//start game
+		playersTurn(players[turn % NUM_PLAYERS]);
 	}
 	
-	public void play() {
+/*	public void play() {
 		do {
 			if (reverse) {
 				playersTurn(players[--turn % NUM_PLAYERS]);
@@ -53,19 +55,31 @@ public class Game {
 			playersTurn(players[turn++ % NUM_PLAYERS]);
 		} while (!gameOver);
 	}
-	
+*/	
+	//RULES: http://unotips.org/pdf/official_rules.pdf
 	private void playersTurn(Player player){
-		player.pickCard(deck.dealCard());
+		//reset nextPlayerSkip
+		nextPlayerSkip = false;
+		//check if deck is empty and reset it
+		if(deck.isEmpty()){
+			try{
+			Card topCard = playingPile.pop();
+			deck.resetDeck(playingPile.getElements());
+			playingPile.reset(topCard);
+			}catch (EmptyPileException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		// need to figure out how were going to play a turn
-		//player chooses card and puts on deck.
+		//player chooses card and puts on deck. or they draw a card
+		player.pickCard(deck.dealCard());
+		//       OR
 		Card cardChosen = player.seeThisCardFromHand(0);//parameter is the index of the card in array list of cards that the player selected to place in pile.
 		//chose 0 for now so error isn't thrown
 		
 		try {
-			if (cardChosen.getColor() == CardColor.WILD
-					|| cardChosen.getColor() == playingPile.peek().getColor()
-					|| cardChosen.getNumber() == playingPile.peek().getNumber()) {// valid move
-				
+		if(cardChosen.canPlay(playingPile.peek())){		
 				playingPile.push(player.getThisCardFromHand(0));// replace parameter with index of
 																// card in player hand pile
 			
@@ -87,7 +101,7 @@ public class Game {
 						draw(4);
 					break;
 				case Card.DRAWTWO:
-						draw(2);
+					draw(2);	
 					break;
 				default:
 					break;
@@ -98,17 +112,108 @@ public class Game {
 		} catch (EmptyPileException e) {
 			playingPile.push(deck.dealCard());
 		}
+		//pass control to the next player
+		if(gameOver == false){
+			nextTurn();
+		}
+		
+	}
+	public void nextTurn(){
+		if(nextPlayerSkip == false){
+			if(!reverse){
+				playersTurn(players[turn++ % NUM_PLAYERS]);
+			}else{
+				playersTurn(players[turn-- % NUM_PLAYERS]);
+			}
+		}else{
+			if(!reverse){
+				playersTurn(players[(turn + 2) % NUM_PLAYERS]);
+			}else{
+				playersTurn(players[(turn - 2) % NUM_PLAYERS]);
+			}
+		}
 	}
 	
 	public void draw(int drawCards){
 		for (int i = 0; i < drawCards; i++) {
 			if(reverse){
-				players[turn-1 % NUM_PLAYERS].pickCard(deck.dealCard());
+				players[(turn-1) % NUM_PLAYERS].pickCard(deck.dealCard());
+				nextPlayerSkip = true; 
 			}
 			else{
-				players[turn+1 % NUM_PLAYERS].pickCard(deck.dealCard());
+				players[(turn+1) % NUM_PLAYERS].pickCard(deck.dealCard());
+				nextPlayerSkip = true; 
 			}
 		}
 	}
+
+	public Player[] getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Player[] players) {
+		this.players = players;
+	}
+
+	public static Deck getDeck() {
+		return deck;
+	}
+
+	public static void setDeck(Deck deck) {
+		Game.deck = deck;
+	}
+
+	public static CardPile getPlayingPile() {
+		return playingPile;
+	}
+
+	public static void setPlayingPile(CardPile playingPile) {
+		Game.playingPile = playingPile;
+	}
+
+	public int getTurn() {
+		return turn;
+	}
+
+	public void setTurn(int turn) {
+		this.turn = turn;
+	}
+
+	public boolean isReverse() {
+		return reverse;
+	}
+
+	public void setReverse(boolean reverse) {
+		this.reverse = reverse;
+	}
+
+	public boolean isNextPlayerSkip() {
+		return nextPlayerSkip;
+	}
+
+	public void setNextPlayerSkip(boolean nextPlayerSkip) {
+		this.nextPlayerSkip = nextPlayerSkip;
+	}
+
+	public boolean isGameOver() {
+		return gameOver;
+	}
+
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
+	}
+
+	public int getWinner() {
+		return winner;
+	}
+
+	public void setWinner(int winner) {
+		this.winner = winner;
+	}
+
+	public int getNUM_PLAYERS() {
+		return NUM_PLAYERS;
+	}
+	
 
 }

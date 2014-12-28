@@ -1,5 +1,7 @@
 package unoGame;
 
+import java.awt.Color;
+
 public class Card {
 
 	final static int SKIP = 10;
@@ -34,7 +36,7 @@ public class Card {
 			return true;
 		}else if(number == otherCard.getNumber()){
 			return true;			
-		}else if(number == 14){
+		}else if(cardColor == CardColor.WILD){//wild or wild draw four
 			return true;
 		}else{
 			return false;
