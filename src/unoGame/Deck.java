@@ -67,13 +67,19 @@ public class Deck {
 		return card;
 		
 	}
-	public void resetDeck(List<Card> pile){
-		cards = pile;
+	public void resetDeck(CardPile pile){
+		try{
+			while(!pile.isEmpty()){
+			cards.add(pile.pop());
+			}
+		}catch(EmptyPileException e){
+			return;
+		}
 	}
 
 	public boolean isEmpty() {
 		//cant wait till its 0 in case someone has a draw 4
-		return cards.size() == 4;
+		return cards.size() <= 4;
 	}
 
 	public String toString() {

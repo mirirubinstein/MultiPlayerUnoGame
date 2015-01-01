@@ -64,7 +64,7 @@ public class Game {
 		if(deck.isEmpty()){
 			try{
 			Card topCard = playingPile.pop();
-			deck.resetDeck(playingPile.getElements());
+			deck.resetDeck(playingPile);
 			playingPile.reset(topCard);
 			}catch (EmptyPileException e) {
 				// TODO Auto-generated catch block
@@ -215,5 +215,4 @@ public class Game {
 		return NUM_PLAYERS;
 	}
 	
-
 }
