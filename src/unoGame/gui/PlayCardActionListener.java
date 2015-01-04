@@ -9,17 +9,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//TODO need to create a game client
 
-public class PlayCardListener implements ActionListener {
+public class PlayCardActionListener implements ActionListener {
     private Card card;
-    //private GameClient gameClient;
     private JPanel panel;
     private Card topCard;
 
-    public PlayCardListener(Card card/*, GameClient gameClient*/, JPanel panel, ScreenShot screenShot) {
+    public PlayCardActionListener(Card card, JPanel panel, ScreenShot screenShot) {
         this.card = card;
-        //this.gameClient = gameClient;
         this.panel = panel;
         this.topCard = screenShot.topCard;
     }
@@ -29,7 +26,7 @@ public class PlayCardListener implements ActionListener {
         JButton button = (JButton) e.getSource();
 
         if (canPlay(card, topCard)) {
-            //TODO need to play the card using game client
+            //TODO need to play the card
             button.setVisible(false);
             panel.remove(button);
             panel.revalidate();

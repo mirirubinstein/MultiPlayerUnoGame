@@ -19,8 +19,8 @@ public class AllPlayersPanel extends JPanel {
 
     private ActionListener otherPlayersActionListener;
 
-    public AllPlayersPanel(PlayerBasicInfo[] playersInfo, boolean isInAscendingOrder, ActionListener OtherPlayersActionListener) {
-        otherPlayersActionListener = OtherPlayersActionListener;
+    public AllPlayersPanel(PlayerBasicInfo[] playersInfo, boolean isInAscendingOrder) {
+        OtherPlayerActionListener otherPlayersActionListener =new  OtherPlayerActionListener();
 
         createAllPlayerButtons(playersInfo);
         direction.setFont(new Font("verdana", Font.BOLD, 30));

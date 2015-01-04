@@ -2,6 +2,7 @@ package unoGame.gui;
 
 import unoGame.Card;
 import unoGame.CardColor;
+import unoGame.messages.ScreenShot;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,11 +14,13 @@ public class PlayersCardsPanel extends JPanel {
     private JScrollPane CardsScroller = new JScrollPane();
     private ActionListener actionListener;
     private boolean isMyTurn;
+    private ScreenShot screenShot;
 
-    public PlayersCardsPanel(boolean isMyTurn, Card[] cards, ActionListener actionListener) {
+    public PlayersCardsPanel(boolean isMyTurn, ScreenShot screenShot) {
+
         this.isMyTurn = isMyTurn;
-        this.actionListener = actionListener;
-        setCards(cards);
+        setCards(screenShot.myCards);
+        this.screenShot =screenShot;
     }
 
     public void setCards(Card[] cards) {
@@ -35,7 +38,7 @@ public class PlayersCardsPanel extends JPanel {
         cardUnoPanel.add(CardsScroller);
 
         add(cardUnoPanel);
-        uno.addActionListener(actionListener);
+        uno.addActionListener(new UnoActionListener());
         setVisible(true);
     }
 
@@ -47,7 +50,7 @@ public class PlayersCardsPanel extends JPanel {
 
     private JButton createCardButton(Card card) {
         JButton cardButton = new JButton();
-        cardButton.addActionListener(actionListener);
+        cardButton.addActionListener(new PlayCardActionListener(card, this, screenShot));
         cardButton.setForeground(Color.BLACK);
         cardButton.setText(card.numberToString());
         cardButton.setEnabled(isMyTurn);

@@ -1,19 +1,14 @@
 package unoGame.gui;
 
-import unoGame.controllers.GameController;
-import unoGame.controllers.ScreenController;
 import unoGame.messages.ScreenShot;
-import unoGame.gameViews.EnteringGameView;
-import unoGame.gameViews.PlayingGameView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EnterGameScreen extends JFrame implements EnteringGameView {
+public class EnterGameScreen extends JFrame {
 
-    private GameController controller;
 
     //UI Components
     JButton join = new JButton("   Join   ");
@@ -22,8 +17,7 @@ public class EnterGameScreen extends JFrame implements EnteringGameView {
     JTextField masterName = new JTextField(15);
     JTextField name = new JTextField(15);
 
-    public EnterGameScreen(GameController controller) {
-        this.controller = controller;
+    public EnterGameScreen() {
         Panel panel = new Panel();
         masterName.setText("localhost");
         panel.add(master).setFont(new Font("verdana", Font.BOLD, 22));
@@ -43,23 +37,30 @@ public class EnterGameScreen extends JFrame implements EnteringGameView {
         add(panel);
     }
 
-    @Override
-    public PlayingGameView switchToPlayingGameView(ScreenController screenController, ScreenShot screenShot) {
-        PlayingGameView view = new Screen(screenController, screenShot);
+    public void switchToPlayingGameJFrame(ScreenShot screenShot, String playerName) {
+        JFrame screen = new Screen(screenShot, playerName);
         setVisible(false);
-        return view;
     }
 
-    public void showScreen() {
-        controller.bind(this);
+    public void showScreen(){
         join.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                controller.join(masterName.getText(), name.getText());
+                join(masterName.getText(), name.getText());
                 join.setEnabled(false);
                 join.setText("Please wait...");
             }
         });
         setVisible(true);
+    }
+
+    public void join(String serverAddress, String playerName) {
+        //need to join game
+
+        //if join successful needs to get a screenShot from the server
+
+        //for now im creating my own screenshot
+        ScreenShot screenShot = new ScreenShot();
+        switchToPlayingGameJFrame(screenShot, playerName);
     }
 }
