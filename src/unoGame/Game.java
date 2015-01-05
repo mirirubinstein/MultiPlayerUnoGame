@@ -1,12 +1,13 @@
 package unoGame;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class Game {
-	private final int NUM_PLAYERS = 4; // WE NEED TO FIGURE OUT HOW TO DEAL WITH
-										// THIS
+	private int NUM_PLAYERS;
 	// max number of players should be 5
-	private Player players[] = new Player[NUM_PLAYERS];
+	//private Player players[] = new Player[NUM_PLAYERS];
+	private ArrayList<Player> players = new ArrayList<Player>();
 	private static Deck deck = new Deck();// pick from here and when empty 
 	private static CardPile playingPile = new CardPile();
 
@@ -17,20 +18,21 @@ public class Game {
 	private int winner;
 	
 	public Game() {
+		NUM_PLAYERS = 0;
 		turn = 0;
 		nextPlayerSkip = false;
 		reverse = false;
 		gameOver = false;
 		//deck.shuffle();
 		
-		for (int i = 0; i < NUM_PLAYERS; i++) {
-			players[i] = new Player(); // construct each new player in the array
-		}
+		//for (int i = 0; i < NUM_PLAYERS; i++) {
+	//		players[i] = new Player(name); // construct each new player in the array
+	//	}
 
 		for (int i = 0; i < 7; i++) // deal out 7 cards to each player
 		{
 			for (int j = 0; j < NUM_PLAYERS; j++) {
-				players[j].pickCard(deck.dealCard());
+				players.get(j).pickCard(deck.dealCard());
 			}
 		}
 		// get base card to start with
@@ -41,7 +43,7 @@ public class Game {
 		} while ((deck.dealCard().getColor().equals(Color.BLACK))
 				|| (deck.dealCard().getNumber() > 9));
 		//start game
-		playersTurn(players[turn % NUM_PLAYERS]);
+	//	playersTurn(players[turn % NUM_PLAYERS]);
 	}
 	
 /*	public void play() {
@@ -121,15 +123,15 @@ public class Game {
 	public void nextTurn(){
 		if(nextPlayerSkip == false){
 			if(!reverse){
-				playersTurn(players[turn++ % NUM_PLAYERS]);
+				playersTurn(players.get(turn++ % NUM_PLAYERS));
 			}else{
-				playersTurn(players[turn-- % NUM_PLAYERS]);
+				playersTurn(players.get(turn-- % NUM_PLAYERS));
 			}
 		}else{
 			if(!reverse){
-				playersTurn(players[(turn + 2) % NUM_PLAYERS]);
+				playersTurn(players.get((turn + 2) % NUM_PLAYERS));
 			}else{
-				playersTurn(players[(turn - 2) % NUM_PLAYERS]);
+				playersTurn(players.get((turn - 2) % NUM_PLAYERS));
 			}
 		}
 	}
@@ -137,21 +139,21 @@ public class Game {
 	public void draw(int drawCards){
 		for (int i = 0; i < drawCards; i++) {
 			if(reverse){
-				players[(turn-1) % NUM_PLAYERS].pickCard(deck.dealCard());
+				players.get((turn-1) % NUM_PLAYERS).pickCard(deck.dealCard());
 				nextPlayerSkip = true; 
 			}
 			else{
-				players[(turn+1) % NUM_PLAYERS].pickCard(deck.dealCard());
+				players.get((turn+1) % NUM_PLAYERS).pickCard(deck.dealCard());
 				nextPlayerSkip = true; 
 			}
 		}
 	}
 
-	public Player[] getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(Player[] players) {
+	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
 
@@ -163,7 +165,7 @@ public class Game {
 		Game.deck = deck;
 	}
 
-	public static CardPile getPlayingPile() {
+	public CardPile getPlayingPile() {
 		return playingPile;
 	}
 
@@ -214,5 +216,32 @@ public class Game {
 	public int getNUM_PLAYERS() {
 		return NUM_PLAYERS;
 	}
+	public void addPlayer(String name){
+		Player p = new Player(name);
+		for(int i = 0; i < 7; i++){
+		p.pickCard(deck.dealCard());
+		}
+		players.add(p);
+		NUM_PLAYERS++;
+		System.out.println("PLAYER ADDED: " + p.toString());
+	}
+	public Player getPlayer(String name){
+		Player player = null;
+		for(Player p: players){
+			if (p.getName().equals(name)){
+				player = p;
+			}
+		}
+		return player;
+	}
+
+	@Override
+	public String toString() {
+		return "Game [NUM_PLAYERS=" + NUM_PLAYERS + ", players=" + players.toString()
+				+ ", turn=" + turn + ", reverse=" + reverse
+				+ ", nextPlayerSkip=" + nextPlayerSkip + ", gameOver="
+				+ gameOver + ", winner=" + winner + "]";
+	}
+	
 	
 }

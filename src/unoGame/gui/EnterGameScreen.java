@@ -1,14 +1,28 @@
 package unoGame.gui;
 
-import unoGame.messages.ScreenShot;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import unoGame.messages.ScreenShot;
 
 public class EnterGameScreen extends JFrame {
-
+	//Socket components
+	Socket socket;
 
     //UI Components
     JButton join = new JButton("   Join   ");
@@ -16,6 +30,7 @@ public class EnterGameScreen extends JFrame {
     JLabel playerName = new JLabel("Your Name :");
     JTextField masterName = new JTextField(15);
     JTextField name = new JTextField(15);
+    
 
     public EnterGameScreen() {
         Panel panel = new Panel();
@@ -56,11 +71,27 @@ public class EnterGameScreen extends JFrame {
 
     public void join(String serverAddress, String playerName) {
         //need to join game
+    	try {
+		socket = new Socket(serverAddress, 3773);
+		//send player data
+		OutputStream out = socket.getOutputStream();
+		String message = "NEWPLAYER " + playerName.toUpperCase() + "\n";
+		out.write(message.getBytes());
+		out.flush();// flush the stream so that the data gets sent\
+		// receive game data... chayala u need to set up protocol
+    	InputStream in = socket.getInputStream();
+		BufferedReader reader = new BufferedReader(
+				new InputStreamReader(in));
+    	} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		
         //if join successful needs to get a screenShot from the server
 
         //for now im creating my own screenshot
-        ScreenShot screenShot = new ScreenShot();
-        switchToPlayingGameJFrame(screenShot, playerName);
+      // ScreenShot screenShot = new ScreenShot();
+      //  switchToPlayingGameJFrame(screenShot, playerName);
     }
 }
