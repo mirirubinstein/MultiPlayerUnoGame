@@ -1,8 +1,9 @@
 package unoGame;
 
-import java.awt.Color;
+import java.io.Serializable;
 
-public class Card {
+
+public class Card implements Serializable{
 
     final static int SKIP = 10;
     final static int REVERSE = 11;

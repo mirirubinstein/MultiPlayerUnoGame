@@ -14,7 +14,7 @@ public class Client {
 	
 
 	public Client() throws UnknownHostException, IOException {
-		socket = new Socket("127.0.0.1", 3773);
+		socket = new Socket("localhost", 3773);
 		//socket = new Socket("192.168.117.107", 3773);
 		out = socket.getOutputStream();
 		thread = new ListeningThread(socket);

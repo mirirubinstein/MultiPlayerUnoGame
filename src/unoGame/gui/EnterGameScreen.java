@@ -18,18 +18,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import unoGame.ListeningThread;
 import unoGame.messages.ScreenShot;
 
 public class EnterGameScreen extends JFrame {
 	//Socket components
 	Socket socket;
-
+	ListeningThread thread;
+	
     //UI Components
     JButton join = new JButton("   Join   ");
     JLabel master = new JLabel("Master Name :");
     JLabel playerName = new JLabel("Your Name :");
     JTextField masterName = new JTextField(15);
     JTextField name = new JTextField(15);
+    
     
 
     public EnterGameScreen() {
@@ -72,16 +75,20 @@ public class EnterGameScreen extends JFrame {
     public void join(String serverAddress, String playerName) {
         //need to join game
     	try {
+    	//listen for data	
 		socket = new Socket(serverAddress, 3773);
+		thread = new ListeningThread(socket);
+		thread.start();
+		
 		//send player data
 		OutputStream out = socket.getOutputStream();
 		String message = "NEWPLAYER " + playerName.toUpperCase() + "\n";
 		out.write(message.getBytes());
 		out.flush();// flush the stream so that the data gets sent\
 		// receive game data... chayala u need to set up protocol
-    	InputStream in = socket.getInputStream();
-		BufferedReader reader = new BufferedReader(
-				new InputStreamReader(in));
+    	//InputStream in = socket.getInputStream();
+		//BufferedReader reader = new BufferedReader(
+		//		new InputStreamReader(in));
     	} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

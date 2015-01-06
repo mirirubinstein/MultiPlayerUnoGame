@@ -18,12 +18,12 @@ import unoGame.messages.UnoMessageFactory;
 public class SocketHandler extends Thread {
 
 	private Socket s;
-	private Queue<String> messages;
+	private Queue<Object> messages;
 	private SocketEventListener listener;
 	private Game game;
 
 	
-	public SocketHandler( Socket s, SocketEventListener listener, Queue<String> messages, Game game) {
+	public SocketHandler( Socket s, SocketEventListener listener, Queue<Object> messages, Game game) {
 		this.s = s;
 		this.messages = messages;
 		this.listener = listener;
@@ -45,10 +45,22 @@ public class SocketHandler extends Thread {
 				UnoMessageFactory factory = new UnoMessageFactory();
 				game.addPlayer(factory.getMessage(line));
 			
+				Player p = game.getPlayer(factory.getMessage(line));
 				
+				//need to set screenshot fields and send it
+				ScreenShot s = new ScreenShot();
+					s.myCards = p.getHand();
+				//	s.playersInfo
+				    s.currentPlayerIndex = 0;
+				    s.topCard = game.getPlayingPile().peek();
+				    s.isInAscendingOrder = game.isReverse();
+				    s.myPlayerIndex = game.getPlayers().size();
+				    
+				   messages.add(s);
+				   
 			}
 			
-		} catch (IOException e) {
+		} catch (IOException | EmptyPileException e) {
 			listener.onDisconnect(s);
 			e.printStackTrace();
 		}

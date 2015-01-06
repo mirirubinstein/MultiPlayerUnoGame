@@ -14,7 +14,7 @@ public class MultiChatServer {
 
 	private ServerSocket serverSocket;
 	private List<Socket> sockets;
-	private BlockingQueue<String> messages;
+	private BlockingQueue<Object> messages;
 	private MessageSenderThread sender;
 	private SocketEventListener listener;
 	private Game game;
@@ -22,7 +22,7 @@ public class MultiChatServer {
 	public MultiChatServer(int port, SocketEventListener listener) throws IOException {
 		serverSocket = new ServerSocket(port);
 		sockets = new ArrayList<Socket>();
-		messages = new LinkedBlockingQueue<String>();
+		messages = new LinkedBlockingQueue<Object>();
 		game = new Game();
 		sender = new MessageSenderThread(sockets, messages, listener, game);
 		sender.start();

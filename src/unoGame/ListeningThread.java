@@ -1,9 +1,8 @@
 package unoGame;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 
 public class ListeningThread extends Thread{
@@ -21,16 +20,15 @@ public class ListeningThread extends Thread{
 	public void run() {
 		try {
 			
-			StringBuilder message = new StringBuilder("");
-			
-			
 			InputStream in = socket.getInputStream();
-			BufferedReader reader = new BufferedReader(
-					new InputStreamReader(in));
+			//BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			ObjectInputStream s = new ObjectInputStream(in);
+			
 
-			String line;
-			while ((line = reader.readLine()) != null) {
-				
+			Object o;
+			while ((o = (Object)s.readObject()) != null) {
+				System.out.println("Thread: ");
+				System.out.println(o.toString());//crashes here... 
 				//what to do with incoming lines
 				//must make protocol
 				
@@ -38,7 +36,7 @@ public class ListeningThread extends Thread{
 			
 			
 			
-		} catch (IOException ex) {
+		} catch (IOException | ClassNotFoundException ex) {
 			System.err.println(ex);
 		}
 		
