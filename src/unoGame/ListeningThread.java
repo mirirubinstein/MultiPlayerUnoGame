@@ -20,15 +20,15 @@ public class ListeningThread extends Thread{
 	public void run() {
 		try {
 			
-			InputStream in = socket.getInputStream();
+			//InputStream in = socket.getInputStream();
 			//BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			ObjectInputStream s = new ObjectInputStream(in);
+			ObjectInputStream s = new ObjectInputStream(socket.getInputStream());
 			
 
 			Object o;
 			while ((o = (Object)s.readObject()) != null) {
 				System.out.println("Thread: ");
-				System.out.println(o.toString());//crashes here... 
+				System.out.println(o.toString());
 				//what to do with incoming lines
 				//must make protocol
 				

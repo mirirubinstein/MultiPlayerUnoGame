@@ -1,15 +1,10 @@
 package schwimmer.multichat;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.Queue;
 
-import unoGame.EmptyPileException;
 import unoGame.Game;
 import unoGame.Player;
 import unoGame.messages.ScreenShot;
@@ -23,23 +18,24 @@ public class SocketHandler extends Thread {
 	private Game game;
 
 	
-	public SocketHandler( Socket s, SocketEventListener listener, Queue<Object> messages, Game game) {
-		this.s = s;
+	public SocketHandler( Socket socket, SocketEventListener listener, Queue<Object> messages, Game game) {
+		this.s = socket;
 		this.messages = messages;
 		this.listener = listener;
 		this.game = game;
-		listener.onConnect(s);
+		listener.onConnect(socket);
 	}
 	
 	public void run() {
 		
 		try {
-			InputStream in = s.getInputStream();
-			BufferedReader reader = new BufferedReader(
-					new InputStreamReader(in));
+			//	InputStream in = s.getInputStream();
+			//BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			ObjectInputStream objectIn = new ObjectInputStream(s.getInputStream());
+	
 			
 			String line;
-			while( (line = reader.readLine()) != null ) {
+			while( (line = (String)objectIn.readObject()) != null ) {
 				listener.onMessage(s, line);
 				messages.add(line);
 				UnoMessageFactory factory = new UnoMessageFactory();
@@ -56,11 +52,11 @@ public class SocketHandler extends Thread {
 				    s.isInAscendingOrder = game.isReverse();
 				    s.myPlayerIndex = game.getPlayers().size();
 				    
-				   messages.add(s);
+				  messages.add(s);
 				   
 			}
 			
-		} catch (IOException | EmptyPileException e) {
+		} catch (Exception e) {
 			listener.onDisconnect(s);
 			e.printStackTrace();
 		}

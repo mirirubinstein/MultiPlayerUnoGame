@@ -5,7 +5,8 @@ import java.io.Serializable;
 
 public class Card implements Serializable{
 
-    final static int SKIP = 10;
+	private static final long serialVersionUID = 1L;
+	final static int SKIP = 10;
     final static int REVERSE = 11;
     final static int DRAWTWO = 12;
     final static int DRAWFOUR = 13; // wild draw four

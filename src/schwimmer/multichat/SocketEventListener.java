@@ -8,6 +8,6 @@ public interface SocketEventListener {
 	public void onServerStart(ServerSocket serverSocket);
 	public void onConnect(Socket socket);
 	public void onDisconnect(Socket socket);
-	public void onMessage(Socket socket, String message);
+	public void onMessage(Socket s, Object line);
 	
 }

@@ -51,7 +51,6 @@ public class ServerLogFrame extends JFrame implements SocketEventListener {
 		append("DISCONNECT " + socket.getInetAddress().toString());
 	}
 
-	@Override
 	public void onMessage(Socket socket, String message) {
 		append(socket.getInetAddress().toString() + " " + message);
 	}
@@ -66,6 +65,12 @@ public class ServerLogFrame extends JFrame implements SocketEventListener {
 		frame.setVisible(true);
 		MultiChatServer server = new MultiChatServer(3773, frame);
 		server.run();
+	}
+
+	@Override
+	public void onMessage(Socket socket, Object line) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

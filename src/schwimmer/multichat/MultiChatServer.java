@@ -1,6 +1,7 @@
 package schwimmer.multichat;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import unoGame.Game;
 public class MultiChatServer {
 
 	private ServerSocket serverSocket;
-	private List<Socket> sockets;
+	private List<SocketStream> sockets;
 	private BlockingQueue<Object> messages;
 	private MessageSenderThread sender;
 	private SocketEventListener listener;
@@ -21,7 +22,7 @@ public class MultiChatServer {
 	
 	public MultiChatServer(int port, SocketEventListener listener) throws IOException {
 		serverSocket = new ServerSocket(port);
-		sockets = new ArrayList<Socket>();
+		sockets = new ArrayList<SocketStream>();
 		messages = new LinkedBlockingQueue<Object>();
 		game = new Game();
 		sender = new MessageSenderThread(sockets, messages, listener, game);
@@ -36,7 +37,7 @@ public class MultiChatServer {
 		try {
 			while (true) {
 				Socket socket = serverSocket.accept();
-				sockets.add(socket);
+				sockets.add(new SocketStream(socket, new ObjectOutputStream(socket.getOutputStream())));
 				SocketHandler handler = new SocketHandler(
 						socket, listener, messages, game);
 				handler.start();

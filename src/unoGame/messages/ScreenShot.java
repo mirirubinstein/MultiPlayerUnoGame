@@ -9,7 +9,9 @@ import unoGame.PlayerBasicInfo;
 import java.io.Serializable;
 
 public class ScreenShot implements Serializable {
-    public Card[] myCards;
+	
+	private static final long serialVersionUID = 1L;
+	public Card[] myCards;
     public PlayerBasicInfo[] playersInfo;
     public int currentPlayerIndex;
     public Card topCard;
