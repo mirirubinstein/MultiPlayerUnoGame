@@ -46,25 +46,23 @@ public class SocketHandler extends Thread {
 					Card c = game.getDeck().dealCard();
 				//	add card to players hand
 					game.getPlayers().get(game.getTurn()).pickCard(c);
-					messages.add(c);
 				//	System.out.println("My Cards: " + game.getPlayers().get(game.getTurn()).getHand()[6] + "\n" + game.getPlayers().get(game.getTurn()).getHand()[7]);
 					//need to refresh screen data
 					Player p = game.getPlayers().get(game.getTurn());
 					shot = getScreenShotData(p);
-				
 					messages.add(shot);
+					game.nextTurn();
+					
 				} else {
-					messages.add(line);
 					game.addPlayer(factory.getMessage(line));
-
-					Player p = game.getPlayer(factory.getMessage(line));
-
-					// need to set screenshot fields and send it
-					shot = getScreenShotData(p);
-
-					messages.add(shot);
 				}
-				
+				Player p = game.getPlayers().get(game.getTurn());
+
+				// need to set screenshot fields and send it
+				shot = getScreenShotData(p);
+
+				messages.add(shot);
+
 			}
 
 		} catch (Exception e) {
@@ -77,10 +75,10 @@ public class SocketHandler extends Thread {
 	private ScreenShot getScreenShotData(Player p) throws EmptyPileException {
 		ScreenShot s = new ScreenShot();
 		s.myCards = p.getHand();
-		s.currentPlayerIndex = 0;
+		s.currentPlayerIndex = game.getTurn();
 		s.topCard = game.getPlayingPile().peek();
 		s.isInAscendingOrder = game.isReverse();
-		s.myPlayerIndex = game.getPlayers().size();
+		s.myPlayerIndex = game.getPlayers().size()-1;
 
 		ArrayList<Player> players = game.getPlayers();
 		PlayerBasicInfo[] list = new PlayerBasicInfo[players.size()];

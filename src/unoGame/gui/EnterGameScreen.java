@@ -7,7 +7,6 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -54,9 +53,11 @@ public class EnterGameScreen extends JFrame {
 		add(panel);
 	}
 
-	public void switchToPlayingGameJFrame(ScreenShot screenShot, String playerName) {
-		JFrame screen = new Screen(screenShot, playerName, socketStream);
+	public Screen switchToPlayingGameJFrame(ScreenShot screenShot) {
+		Screen screen = new Screen(screenShot, name.getText(), socketStream);
+		screen.setMyPlayerIndex(screenShot.playersInfo.length-1);
 		setVisible(false);
+		return screen;
 	}
 
 	public void showScreen() {

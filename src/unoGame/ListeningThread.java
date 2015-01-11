@@ -5,15 +5,19 @@ import java.io.ObjectInputStream;
 import java.net.Socket;
 
 import unoGame.gui.EnterGameScreen;
+import unoGame.gui.Screen;
 import unoGame.messages.ScreenShot;
 
 public class ListeningThread extends Thread {
 	private Socket socket;
 	private EnterGameScreen screen;
-
+	private boolean newGame;
+	private Screen playingScreen;
+	
 	public ListeningThread(Socket socket, EnterGameScreen screen) {
 		this.socket = socket;
 		this.screen = screen;
+		this.newGame = true;
 
 	}
 
@@ -30,16 +34,15 @@ public class ListeningThread extends Thread {
 			ScreenShot ss;
 			Card c;
 			while ((o = (Object) s.readObject()) != null) {
-				System.out.println("Thread: " + o.getClass());
-				
-				System.out.println(o.toString());
-				if(o instanceof ScreenShot){
-					ss = (ScreenShot)o;
-					screen.switchToPlayingGameJFrame(ss, "playerName");//need to get actual name
-				}else if(o instanceof Card){
-					c = (Card)o;
-					System.out.println("CARD: " + c);
+				ss = (ScreenShot)o;
+				if(newGame){
+					playingScreen = screen.switchToPlayingGameJFrame(ss);//need to get actual name	
+					newGame = false;
 				}
+				else{
+					playingScreen.update(ss);
+				}
+				
 				
 
 			}

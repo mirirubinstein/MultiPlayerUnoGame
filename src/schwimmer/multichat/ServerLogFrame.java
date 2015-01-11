@@ -11,15 +11,14 @@ import javax.swing.JTextArea;
 import javax.swing.text.DefaultCaret;
 
 import unoGame.EmptyPileException;
-import unoGame.Game;
 
 public class ServerLogFrame extends JFrame implements SocketEventListener {
 	private static final long serialVersionUID = 1L;
 	private JTextArea area;
 
 	public ServerLogFrame(String title) {
-		
-		setSize(800,600);
+		setSize(200,200);
+		//setSize(800,600);
 		setTitle(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

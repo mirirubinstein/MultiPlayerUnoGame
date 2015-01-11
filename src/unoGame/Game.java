@@ -124,18 +124,18 @@ public class Game {
 
 	}
 
-	public void nextTurn() {
+	public void nextTurn() {//sets next turn;
 		if (nextPlayerSkip == false) {
 			if (!reverse) {
-				playersTurn(players.get(turn++ % NUM_PLAYERS));
-			} else {
-				playersTurn(players.get(turn-- % NUM_PLAYERS));
+				turn = ++turn%NUM_PLAYERS;
+				} else {
+				turn = --turn % NUM_PLAYERS;
 			}
 		} else {
 			if (!reverse) {
-				playersTurn(players.get((turn + 2) % NUM_PLAYERS));
+				turn = (turn + 2) % NUM_PLAYERS;
 			} else {
-				playersTurn(players.get((turn - 2) % NUM_PLAYERS));
+				turn = (turn - 2) % NUM_PLAYERS;
 			}
 		}
 	}

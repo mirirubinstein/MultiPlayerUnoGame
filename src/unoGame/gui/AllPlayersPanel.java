@@ -2,12 +2,17 @@ package unoGame.gui;
 
 
 
-import unoGame.PlayerBasicInfo;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import unoGame.PlayerBasicInfo;
 
 public class AllPlayersPanel extends JPanel {
 
@@ -46,8 +51,7 @@ public class AllPlayersPanel extends JPanel {
     }
 
     private void createAllPlayerButtons(PlayerBasicInfo[] basicInfo) {
-
-        for (PlayerBasicInfo info : basicInfo) {
+    	for (PlayerBasicInfo info : basicInfo) {
             playerButtons.add(new JButton(info.name + " : " + info.cardsInHand));
             JButton playerButton = playerButtons.get(playerButtons.size() - 1);
             playerButton.setPreferredSize(new Dimension(150, 100));
@@ -59,9 +63,11 @@ public class AllPlayersPanel extends JPanel {
     }
 
     public void update(PlayerBasicInfo[] info, boolean isInAscendingOrder) {
+    	
         for (int i = 0; i < playerButtons.size(); i++) {
             playerButtons.get(i).setText(info[i].name + " : " + info[i].cardsInHand);
         }
+        //createAllPlayerButtons(info);
         setDirection(isInAscendingOrder);
     }
 }

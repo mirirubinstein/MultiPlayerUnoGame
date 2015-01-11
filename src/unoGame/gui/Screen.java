@@ -3,7 +3,6 @@ package unoGame.gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.net.Socket;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,6 +23,7 @@ public class Screen extends JFrame{
     private UpdatesPanel activityLogPanel;
     private boolean isMyTurn;
     private SocketOutStream socket;
+    private int myPlayerIndex;
 
     public Screen(ScreenShot screenShot, String playersName, SocketOutStream socket) {
     	this.socket = socket;
@@ -34,6 +34,7 @@ public class Screen extends JFrame{
 
         if(screenShot.currentPlayerIndex == screenShot.myPlayerIndex){
             isMyTurn=true;
+            
         }else{
             isMyTurn=false;
         }
@@ -81,16 +82,29 @@ public class Screen extends JFrame{
 
 
     public void update(ScreenShot screenShot) {
-        if(screenShot.currentPlayerIndex == screenShot.myPlayerIndex){
-            isMyTurn=true;
+    	isMyTurn = false;
+        if(screenShot.currentPlayerIndex == myPlayerIndex){
+           isMyTurn=true;
+            pickCardsPanel.update(isMyTurn);
+            topCardPanel.setTopCard(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
+            allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder);
+            playersCardsPanel.update(screenShot.myCards);
+            player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
+       
         }else{
-            isMyTurn =false;
+            pickCardsPanel.update(isMyTurn);
+           	topCardPanel.setTopCard(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
+            allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder);
+            player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
+       
         }
 
-        pickCardsPanel.update(isMyTurn);
-        topCardPanel.setTopCard(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
-        allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder);
-        playersCardsPanel.update(screenShot.myCards);
-        player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
-    }
+         }
+
+
+
+	public void setMyPlayerIndex(int length) {
+		myPlayerIndex = length;
+		
+	}
 }
