@@ -51,5 +51,8 @@ public class Player {
 		}
 		return cards;
 	}
+	public boolean getCalledUno(){
+		return calledUno;
+	}
 
 }

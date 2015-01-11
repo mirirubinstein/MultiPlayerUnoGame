@@ -7,6 +7,7 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import schwimmer.multichat.SocketOutStream;
 import unoGame.ListeningThread;
 import unoGame.messages.ScreenShot;
 
@@ -23,6 +25,7 @@ public class EnterGameScreen extends JFrame {
 	// Socket components
 	Socket socket;
 	ListeningThread thread;
+	SocketOutStream socketStream;
 
 	// UI Components
 	JButton join = new JButton("   Join   ");
@@ -52,7 +55,7 @@ public class EnterGameScreen extends JFrame {
 	}
 
 	public void switchToPlayingGameJFrame(ScreenShot screenShot, String playerName) {
-		JFrame screen = new Screen(screenShot, playerName);
+		JFrame screen = new Screen(screenShot, playerName, socketStream);
 		setVisible(false);
 	}
 
@@ -72,14 +75,16 @@ public class EnterGameScreen extends JFrame {
 		// need to join game
 		try {
 			// listen for data
-			// receive game data... chayala u need to set up protocol
 			socket = new Socket(serverAddress, 3773);
-			thread = new ListeningThread(socket);
+			thread = new ListeningThread(socket, this);
 			thread.start();
 
 			// send player data
+			
 			OutputStream outS = socket.getOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(outS);
+			
+			socketStream = new SocketOutStream(socket, out);
 			String message = "NEWPLAYER " + playerName.toUpperCase() + "\n";
 			out.writeObject(message);
 			out.flush();// flush the stream so that the data gets sent\
@@ -90,10 +95,6 @@ public class EnterGameScreen extends JFrame {
 			e.printStackTrace();
 		}
 
-		// if join successful needs to get a screenShot from the server
-
-		// for now im creating my own screenshot
-		// ScreenShot screenShot = new ScreenShot();
-		// switchToPlayingGameJFrame(screenShot, playerName);
+	
 	}
 }

@@ -3,11 +3,11 @@ package schwimmer.multichat;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class SocketStream {
+public class SocketOutStream {
 	private Socket socket;
 	private ObjectOutputStream out;
 	
-	public SocketStream(Socket socket, ObjectOutputStream out){
+	public SocketOutStream(Socket socket, ObjectOutputStream out){
 		this.socket = socket;
 		this.out = out;
 	}

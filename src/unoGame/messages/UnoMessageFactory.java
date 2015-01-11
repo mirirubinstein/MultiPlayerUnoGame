@@ -11,6 +11,8 @@ public class UnoMessageFactory {
 		case "NEWPLAYER": 
 			String name = scanner.next();
 			return name;
+		case "DRAW":
+			return "DRAW\n";
 		}
 		return null;
 	}

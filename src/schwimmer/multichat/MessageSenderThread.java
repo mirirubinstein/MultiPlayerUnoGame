@@ -13,13 +13,13 @@ import unoGame.Game;
 
 public class MessageSenderThread extends Thread {
 
-	private List<SocketStream> socketStreams;
+	private List<SocketOutStream> socketStreams;
 	private BlockingQueue<Object> messages;
 	private SocketEventListener listener;
 	private Game game;
 
 	public MessageSenderThread(
-			List<SocketStream> sockets, 
+			List<SocketOutStream> sockets, 
 			BlockingQueue<Object> messages,
 			SocketEventListener listener, Game game) {
 		this.socketStreams = sockets;
@@ -35,18 +35,19 @@ public class MessageSenderThread extends Thread {
 			try {
 				Object message = messages.take();
 
-				Iterator<SocketStream> iter = socketStreams.iterator();
+				Iterator<SocketOutStream> iter = socketStreams.iterator();
 				while ( iter.hasNext() ) {
-					SocketStream socket = iter.next();
+					SocketOutStream socketStream = iter.next();
 					try {
-						OutputStream out = socket.getOut();
-						ObjectOutputStream objectOut = new ObjectOutputStream(out);
+					//	OutputStream out = socketStream.getOut();
+						ObjectOutputStream objectOut = socketStream.getOut();
 						objectOut.writeObject(message);
 						objectOut.flush();
+						objectOut.reset();
 					} catch (IOException e) {
 						e.printStackTrace();
 						iter.remove();
-						listener.onDisconnect(socket.getSocket());
+						listener.onDisconnect(socketStream.getSocket());
 					}
 				}
 			} catch (InterruptedException e) {

@@ -10,7 +10,7 @@ public class PickCardsPanel extends JPanel {
     public PickCardsPanel(boolean isMyTurn, ActionListener PickCardsActionListener) {
         pick= new JButton("Draw Cards");
         pick.setPreferredSize(new Dimension(100, 150));
-        pick.setEnabled(isMyTurn);
+        pick.setEnabled(true);
         pick.addActionListener(PickCardsActionListener);
         pick.setFont(new Font("verdana", Font.BOLD, 18));
         add(pick);

@@ -8,8 +8,8 @@ public class Game {
 	// max number of players should be 5
 	// private Player players[] = new Player[NUM_PLAYERS];
 	private ArrayList<Player> players = new ArrayList<Player>();
-	private static Deck deck = new Deck();// pick from here and when empty
-	private static CardPile playingPile = new CardPile();
+	private Deck deck = new Deck();// pick from here and when empty
+	private CardPile playingPile = new CardPile();
 
 	private int turn;
 	private boolean reverse;
@@ -17,13 +17,13 @@ public class Game {
 	private boolean gameOver;
 	private int winner;
 
-	public Game() {
+	public Game() throws EmptyPileException {
 		NUM_PLAYERS = 0;
 		turn = 0;
 		nextPlayerSkip = false;
 		reverse = false;
 		gameOver = false;
-		// deck.shuffle();
+		deck.shuffle();
 
 		// for (int i = 0; i < NUM_PLAYERS; i++) {
 		// players[i] = new Player(name); // construct each new player in the
@@ -41,7 +41,7 @@ public class Game {
 			playingPile.push(deck.dealCard());
 			// lays down cards until the first card to play on is a regular
 			// number card.
-		} while ((deck.dealCard().getColor().equals(Color.BLACK)) || (deck.dealCard().getNumber() > 9));
+		} while ((playingPile.peek().getColor().equals(Color.BLACK)) || (playingPile.peek().getNumber() > 9));
 		// start game
 		// playersTurn(players[turn % NUM_PLAYERS]);
 	}
@@ -160,20 +160,20 @@ public class Game {
 		this.players = players;
 	}
 
-	public static Deck getDeck() {
+	public Deck getDeck() {
 		return deck;
 	}
 
-	public static void setDeck(Deck deck) {
-		Game.deck = deck;
+	public void setDeck(Deck deck) {
+		this.deck = deck;
 	}
 
 	public CardPile getPlayingPile() {
 		return playingPile;
 	}
 
-	public static void setPlayingPile(CardPile playingPile) {
-		Game.playingPile = playingPile;
+	public void setPlayingPile(CardPile playingPile) {
+		this.playingPile = playingPile;
 	}
 
 	public int getTurn() {
@@ -227,7 +227,7 @@ public class Game {
 		}
 		players.add(p);
 		NUM_PLAYERS++;
-		System.out.println("PLAYER ADDED: " + p.toString());
+		//System.out.println("PLAYER ADDED: " + p.toString());
 	}
 
 	public Player getPlayer(String name) {

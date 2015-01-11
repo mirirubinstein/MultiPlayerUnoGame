@@ -1,12 +1,16 @@
 package unoGame.gui;
 
-import unoGame.Card;
-import unoGame.CardColor;
-import unoGame.PlayerBasicInfo;
-import unoGame.messages.ScreenShot;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.net.Socket;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import schwimmer.multichat.SocketOutStream;
+import unoGame.messages.ScreenShot;
 
 public class Screen extends JFrame{
 
@@ -19,8 +23,10 @@ public class Screen extends JFrame{
     private JLabel player;
     private UpdatesPanel activityLogPanel;
     private boolean isMyTurn;
+    private SocketOutStream socket;
 
-    public Screen(ScreenShot screenShot, String playersName) {
+    public Screen(ScreenShot screenShot, String playersName, SocketOutStream socket) {
+    	this.socket = socket;
 
         this.setTitle((playersName));
 
@@ -32,7 +38,7 @@ public class Screen extends JFrame{
             isMyTurn=false;
         }
 
-        PickCardsActionListener pickCardsActionListener = new PickCardsActionListener();
+        PickCardsActionListener pickCardsActionListener = new PickCardsActionListener(socket);
 
         pickCardsPanel = new PickCardsPanel(isMyTurn, pickCardsActionListener);
 

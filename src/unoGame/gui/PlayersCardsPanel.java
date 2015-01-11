@@ -50,7 +50,7 @@ public class PlayersCardsPanel extends JPanel {
 
     private JButton createCardButton(Card card) {
         JButton cardButton = new JButton();
-        cardButton.addActionListener(new PlayCardActionListener(card, this, screenShot));
+     //   cardButton.addActionListener(new PlayCardActionListener(card, this, screenShot));
         cardButton.setForeground(Color.BLACK);
         cardButton.setText(card.numberToString());
         cardButton.setEnabled(isMyTurn);

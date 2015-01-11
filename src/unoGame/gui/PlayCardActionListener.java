@@ -1,13 +1,14 @@
 package unoGame.gui;
 
 
-import com.sun.xml.internal.bind.v2.TODO;
-import unoGame.Card;
-import unoGame.messages.ScreenShot;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import unoGame.Card;
+import unoGame.messages.ScreenShot;
 
 
 public class PlayCardActionListener implements ActionListener {

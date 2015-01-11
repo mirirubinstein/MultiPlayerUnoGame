@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.text.DefaultCaret;
 
+import unoGame.EmptyPileException;
 import unoGame.Game;
 
 public class ServerLogFrame extends JFrame implements SocketEventListener {
@@ -60,7 +61,7 @@ public class ServerLogFrame extends JFrame implements SocketEventListener {
 		append("SERVER START " + serverSocket.getLocalPort());
 	}
 
-	public static void main( String args[] ) throws IOException {
+	public static void main( String args[] ) throws IOException, EmptyPileException {
 		ServerLogFrame frame = new ServerLogFrame("Server");
 		frame.setVisible(true);
 		MultiChatServer server = new MultiChatServer(3773, frame);
@@ -68,9 +69,9 @@ public class ServerLogFrame extends JFrame implements SocketEventListener {
 	}
 
 	@Override
-	public void onMessage(Socket socket, Object line) {
+	public void onMessage(Socket socket, Object message) {
 		// TODO Auto-generated method stub
-		
+		append(socket.getInetAddress().toString() + " " + message);
 	}
 
 	
