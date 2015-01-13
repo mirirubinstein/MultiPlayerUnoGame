@@ -1,6 +1,5 @@
 package schwimmer.multichat;
 
-import java.awt.Color;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Queue;
@@ -20,7 +19,6 @@ public class SocketHandler extends Thread {
 	private Queue<Object> messages;
 	private SocketEventListener listener;
 	private Game game;
-	private ScreenShot shot;
 
 	public SocketHandler(SocketInStream socket, SocketEventListener listener,
 			Queue<Object> messages, Game game) {
@@ -40,73 +38,55 @@ public class SocketHandler extends Thread {
 			ObjectInputStream objectIn = s.getIn();
 
 			String line;
+			Player p;
+			ScreenShot shot;
+
 			while ((line = (String) objectIn.readObject()) != null) {
 				listener.onMessage(s.getSocket(), line);
 
 				UnoMessageFactory factory = new UnoMessageFactory();
 				if (factory.getMessage(line).trim().equals("DRAW")) {
 					Card c = game.getDeck().dealCard();
-				//	add card to players hand
+					// add card to players hand
 					game.getPlayers().get(game.getTurn()).pickCard(c);
-				//	System.out.println("My Cards: " + game.getPlayers().get(game.getTurn()).getHand()[6] + "\n" + game.getPlayers().get(game.getTurn()).getHand()[7]);
-					//need to refresh screen data
-					Player p = game.getPlayers().get(game.getTurn());
-					shot = getScreenShotData(p);
-					messages.add(shot);
+					// System.out.println("My Cards: " +
+					// game.getPlayers().get(game.getTurn()).getHand()[6] + "\n"
+					// + game.getPlayers().get(game.getTurn()).getHand()[7]);
+					// need to refresh screen data
+					sendScreenShot();
+
 					game.nextTurn();
-					Player p2 = game.getPlayers().get(game.getTurn());
 
-					// need to set screenshot fields and send it
-					shot = getScreenShotData(p2);
+					sendScreenShot();
 
-					messages.add(shot);
-					
-				}else if(factory.getMessage(line).split(" ")[0].trim().equals("PLAY_CARD")){
+				} else if (factory.getMessage(line).split(" ")[0].trim()
+						.equals("PLAY_CARD")) {
 					String color = factory.getMessage(line).split(" ")[1];
 					String number = factory.getMessage(line).split(" ")[2];
-										
-					Card c = new Card(stringToColor(color), Integer.parseInt(number));
-					//NEXT LINE NOT WORKING!!!!
+					
+					Card c = new Card(stringToColor(color),
+							Integer.parseInt(number));
+				
 					game.getPlayers().get(game.getTurn()).removeCardFromHand(c);
-					
+					sendScreenShot();
 
-					Player p = game.getPlayers().get(game.getTurn());
-
-					// need to set screenshot fields and send it
-					shot = getScreenShotData(p);
-
-					messages.add(shot);
-					
 					game.getPlayingPile().push(c);
-					game.nextTurn();
+					if(Integer.parseInt(number) < 13){
+						game.nextTurn();
+						//System.out.println("IT works!"+number);
+					}
+					sendScreenShot();
 					
-					Player p1 = game.getPlayers().get(game.getTurn());
-
-					// need to set screenshot fields and send it
-					shot = getScreenShotData(p1);
-
-					messages.add(shot);
 				} else {
 					game.addPlayer(factory.getMessage(line));
-					Player p = game.getPlayers().get(game.getTurn());
-
-					// need to set screenshot fields and send it
-					shot = getScreenShotData(p);
-
-					messages.add(shot);
 					
-					Player p2 = game.getPlayers().get(game.getPlayers().size()-1);
-					System.out.println(game.getPlayers().size()-1);
-					Card[] cards = p2.getHand();
-					for(Card c: cards){
-						System.out.println(c);
-					}
-					// need to set screenshot fields and send it
+					// send screen shot of last player that joined
+					Player p2 = game.getPlayers().get(
+							game.getPlayers().size() - 1);
 					shot = getScreenShotData(p2);
-
 					messages.add(shot);
+					sendScreenShot();
 				}
-				
 
 			}
 
@@ -123,7 +103,7 @@ public class SocketHandler extends Thread {
 		s.currentPlayerIndex = game.getTurn();
 		s.topCard = game.getPlayingPile().peek();
 		s.isInAscendingOrder = game.isReverse();
-		s.myPlayerIndex = game.getPlayers().size()-1;
+		s.myPlayerIndex = game.getPlayers().size() - 1;
 
 		ArrayList<Player> players = game.getPlayers();
 		PlayerBasicInfo[] list = new PlayerBasicInfo[players.size()];
@@ -134,12 +114,14 @@ public class SocketHandler extends Thread {
 		s.playersInfo = list;
 		return s;
 	}
-	public CardColor stringToColor(String c){
-	String names[] = {"BLACK", "BLUE", "GREEN", "RED", "YELLOW"};   
-	CardColor colors[] = {CardColor.BLACK, CardColor.BLUE, CardColor.GREEN, CardColor.RED, CardColor.YELLOW};
-	
-		for(int i = 0; i < names.length; i++){
-			if(c.equals(names[i])){
+
+	public CardColor stringToColor(String c) {
+		String names[] = { "BLACK", "BLUE", "GREEN", "RED", "YELLOW" };
+		CardColor colors[] = { CardColor.BLACK, CardColor.BLUE,
+				CardColor.GREEN, CardColor.RED, CardColor.YELLOW };
+
+		for (int i = 0; i < names.length; i++) {
+			if (c.equals(names[i])) {
 				return colors[i];
 			}
 		}
@@ -147,4 +129,9 @@ public class SocketHandler extends Thread {
 		return null;
 	}
 
+	public void sendScreenShot() throws EmptyPileException {
+		Player p = game.getPlayers().get(game.getTurn());
+		ScreenShot shot = getScreenShotData(p);
+		messages.add(shot);
+	}
 }
