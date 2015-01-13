@@ -25,6 +25,13 @@ public class Player {
 		// receives a card and puts it into the hand after all the cards.
 		hand.add(c);
 	}
+	public void removeCardFromHand(Card card){//NOT WORKING
+		for(int i = 0; i < hand.size(); i++){
+			if (hand.get(i).equals(card)){
+				System.out.println(hand.remove(i));
+			}
+		}
+	}
 
 	public int getNumCardsInHand() {
 		return hand.size();

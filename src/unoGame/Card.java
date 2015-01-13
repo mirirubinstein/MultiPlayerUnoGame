@@ -1,5 +1,6 @@
 package unoGame;
 
+import java.awt.Color;
 import java.io.Serializable;
 
 
@@ -20,8 +21,11 @@ public class Card implements Serializable{
         this.number = number;
     }
 
+
     public CardColor getColor() {
+    	 
         return cardColor;
+       
     }
 
     public int getNumber() {
@@ -48,15 +52,15 @@ public class Card implements Serializable{
     }
 
     public boolean canPlay(Card otherCard) {
-        if (cardColor == otherCard.getColor()) {
-            return true;
-        } else if (number == otherCard.getNumber()) {
-            return true;
-        } else if (cardColor == CardColor.WILD) {//wild or wild draw four
-            return true;
+       if ( cardColor == otherCard.getColor() || number == otherCard.getNumber()|| otherCard.cardColor == CardColor.BLACK ||otherCard.cardColor == CardColor.BLACK ||cardColor == CardColor.BLACK )   {
+    	  System.out.println("TRUE");
+    	   return true;
         } else {
             return false;
         }
+    }
+    public boolean equals(Card otherCard){
+    	return cardColor.equals(otherCard.getColor()) && number == otherCard.getNumber();
     }
 
 }

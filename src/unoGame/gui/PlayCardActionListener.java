@@ -1,51 +1,67 @@
 package unoGame.gui;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
+import schwimmer.multichat.SocketOutStream;
 import unoGame.Card;
-import unoGame.messages.ScreenShot;
-
 
 public class PlayCardActionListener implements ActionListener {
-    private Card card;
-    private JPanel panel;
-    private Card topCard;
+	private SocketOutStream socket;
+	private Card card;
+	private Card topCard;
 
-    public PlayCardActionListener(Card card, JPanel panel, ScreenShot screenShot) {
-        this.card = card;
-        this.panel = panel;
-        this.topCard = screenShot.topCard;
-    }
+	public PlayCardActionListener(SocketOutStream socket, Card card,
+			Card topCard) {
+		this.socket = socket;
+		this.card = card;
+		this.topCard = topCard;
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton) e.getSource();
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// what happens when a player picks a card
+		if (topCard.canPlay(card)) {
 
-        if (canPlay(card, topCard)) {
-            //TODO need to play the card
-            button.setVisible(false);
-            panel.remove(button);
-            panel.revalidate();
-        } else
-            button.setToolTipText("You cannot play this card on " + topCard);
-    }
+			try {
 
-    public boolean canPlay(Card playedCard, Card topCard) {
-        if (playedCard.getNumber() == 14) {
-            return true;
-        }
+				ObjectOutputStream out = socket.getOut();
+				String message = "PLAY_CARD " + card.getColor() + " "
+						+ card.getNumber();
+				out.writeObject(message);
+				out.flush();// flush the stream so that the data gets sent\
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} else {
 
-        if (playedCard.getNumber() == topCard.getNumber()) {
-            return true;
-        }
-        if (playedCard.getColor().equals(topCard.getColor())) {
-            return true;
-        }
-        return false;
-    }
+		}
+	}
+	/*
+	 * private Card card; private JPanel panel; private Card topCard;
+	 * 
+	 * public PlayCardActionListener(Card card, JPanel panel, ScreenShot
+	 * screenShot) { this.card = card; this.panel = panel; this.topCard =
+	 * screenShot.topCard; }
+	 * 
+	 * @Override public void actionPerformed(ActionEvent e) { JButton button =
+	 * (JButton) e.getSource();
+	 * 
+	 * if (canPlay(card, topCard)) { //TODO need to play the card
+	 * button.setVisible(false); panel.remove(button); panel.revalidate(); }
+	 * else button.setToolTipText("You cannot play this card on " + topCard); }
+	 * 
+	 * public boolean canPlay(Card playedCard, Card topCard) { if
+	 * (playedCard.getNumber() == 14) { return true; }
+	 * 
+	 * if (playedCard.getNumber() == topCard.getNumber()) { return true; } if
+	 * (playedCard.getColor().equals(topCard.getColor())) { return true; }
+	 * return false;
+	 * 
+	 * 
+	 * }
+	 */
 }

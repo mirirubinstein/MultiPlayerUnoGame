@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import schwimmer.multichat.SocketOutStream;
+import unoGame.Card;
 import unoGame.messages.ScreenShot;
 
 public class Screen extends JFrame{
@@ -38,15 +39,14 @@ public class Screen extends JFrame{
         }else{
             isMyTurn=false;
         }
-
+   
         PickCardsActionListener pickCardsActionListener = new PickCardsActionListener(socket);
 
         pickCardsPanel = new PickCardsPanel(isMyTurn, pickCardsActionListener);
 
         allPlayersPanel = new AllPlayersPanel(screenShot.playersInfo, screenShot.isInAscendingOrder);
 
-
-        playersCardsPanel = new PlayersCardsPanel(isMyTurn, screenShot);
+        playersCardsPanel = new PlayersCardsPanel(isMyTurn, screenShot, socket);
 
         activityLogPanel = new UpdatesPanel();
         currentPlayer = new JPanel();
@@ -90,12 +90,14 @@ public class Screen extends JFrame{
             allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder);
             playersCardsPanel.update(screenShot.myCards);
             player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
+            playersCardsPanel.enableCards(isMyTurn);
        
         }else{
             pickCardsPanel.update(isMyTurn);
            	topCardPanel.setTopCard(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
             allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder);
             player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
+            playersCardsPanel.enableCards(isMyTurn);
        
         }
 
