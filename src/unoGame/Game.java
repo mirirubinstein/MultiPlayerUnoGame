@@ -128,14 +128,30 @@ public class Game {
 		if (nextPlayerSkip == false) {
 			if (!reverse) {
 				turn = ++turn % NUM_PLAYERS;
+				if (turn < 0)
+				{
+				    turn += NUM_PLAYERS;
+				}
 				} else {
 				turn = --turn % NUM_PLAYERS;
+				if (turn < 0)
+				{
+				    turn += NUM_PLAYERS;
+				}
 			}
 		} else {
 			if (!reverse) {
 				turn = (turn + 2) % NUM_PLAYERS;
+				if (turn < 0)
+				{
+				    turn += NUM_PLAYERS;
+				}
 			} else {
 				turn = (turn - 2) % NUM_PLAYERS;
+				if (turn < 0)
+				{
+				    turn += NUM_PLAYERS;
+				}
 			}
 		}
 	}
@@ -239,7 +255,9 @@ public class Game {
 		}
 		return player;
 	}
-	
+	public boolean getReverse(){
+		return reverse;
+	}
 
 	@Override
 	public String toString() {

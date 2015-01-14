@@ -72,18 +72,39 @@ public class SocketHandler extends Thread {
 
 					game.getPlayingPile().push(c);
 					
-					switch (Integer.parseInt(number)) {
-
 					// case 13:
 					// game.nextTurn();
 					// System.out.println("IT works!"+number);
 					// break;
-					default:
-						game.nextTurn();
-						break;
-
-					}
 					
+
+						switch (Integer.parseInt(number)) {
+
+						case 10:
+							game.setNextPlayerSkip(true);
+							game.nextTurn();
+							sendScreenShot();
+							game.setNextPlayerSkip(false);
+							break;
+						case 11:
+							game.setReverse(!game.getReverse());
+							game.nextTurn();
+							break;
+						case 12:
+						//	game.draw(4);
+						//	break;
+						case 13:
+						//	game.draw(2);
+						//	game.nextTurn();
+							break;
+						case 14: 
+							//nothing, go again
+							break;
+						default:
+							game.nextTurn();
+							break;
+						}
+
 					
 					sendScreenShot();
 					
