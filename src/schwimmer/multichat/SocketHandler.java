@@ -71,10 +71,20 @@ public class SocketHandler extends Thread {
 					sendScreenShot();
 
 					game.getPlayingPile().push(c);
-					if(Integer.parseInt(number) < 13){
+					
+					switch (Integer.parseInt(number)) {
+
+					// case 13:
+					// game.nextTurn();
+					// System.out.println("IT works!"+number);
+					// break;
+					default:
 						game.nextTurn();
-						//System.out.println("IT works!"+number);
+						break;
+
 					}
+					
+					
 					sendScreenShot();
 					
 				} else {

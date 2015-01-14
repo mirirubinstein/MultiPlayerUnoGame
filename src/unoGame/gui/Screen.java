@@ -88,7 +88,7 @@ public class Screen extends JFrame{
             pickCardsPanel.update(isMyTurn);
             topCardPanel.setTopCard(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
             allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder);
-            playersCardsPanel.update(screenShot.myCards);
+            playersCardsPanel.update(screenShot.myCards, screenShot.topCard);
             player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
             playersCardsPanel.enableCards(isMyTurn);
        

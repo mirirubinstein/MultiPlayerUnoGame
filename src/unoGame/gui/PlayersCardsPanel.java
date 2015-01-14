@@ -29,15 +29,15 @@ public class PlayersCardsPanel extends JPanel {
         this.isMyTurn = isMyTurn;
         this.socket = socket;
         this.screenShot = screenShot; 
-        setCards(screenShot.myCards);
+        setCards(screenShot.myCards, screenShot.topCard);
         
         
         
     }
 
-    public void setCards(Card[] cards) {
+    public void setCards(Card[] cards, Card top) {
     	  
-        addCardsToPanel(cards);
+        addCardsToPanel(cards, top);
         CardsScroller.getViewport().add(cardsPanel);
         CardsScroller.setPreferredSize(new Dimension(750, 180));
         CardsScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -55,14 +55,14 @@ public class PlayersCardsPanel extends JPanel {
         setVisible(true);
     }
 
-    private void addCardsToPanel(Card[] cards) {
+    private void addCardsToPanel(Card[] cards, Card topCard) {
         for (Card card : cards) {
-            cardsPanel.add(createCardButton(card));
+            cardsPanel.add(createCardButton(card, topCard));
           
         }
     }
 
-    private JButton createCardButton(Card card) {
+    private JButton createCardButton(Card card, Card topCard) {
         JButton cardButton = new JButton();
         cardButton.setForeground(Color.BLACK);
         cardButton.setText(card.numberToString());
@@ -74,16 +74,15 @@ public class PlayersCardsPanel extends JPanel {
         }
         cardButton.setPreferredSize(new Dimension(100, 150));
         cardButton.setVisible(true);
-        
-        cardButton.addActionListener(new PlayCardActionListener(socket, card, screenShot.topCard));
+        cardButton.addActionListener(new PlayCardActionListener(socket, card, topCard));
         return cardButton;
     }
 
-    public void update(Card[] cards) {
+    public void update(Card[] cards, Card topCard) {
         //logic is not right needs to be changed
         //not handeled uno button
         cardsPanel.removeAll();
-        addCardsToPanel(cards);
+        addCardsToPanel(cards, topCard);
         cardsPanel.revalidate();
      
     }
@@ -91,6 +90,7 @@ public class PlayersCardsPanel extends JPanel {
     	   int numCards = cardsPanel.getComponentCount();
            for(int i = 0; i < numCards; i++){
            	cardsPanel.getComponent(i).setEnabled(turn);
+           	
            }
     }
 }

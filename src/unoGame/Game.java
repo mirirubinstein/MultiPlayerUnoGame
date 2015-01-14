@@ -127,7 +127,7 @@ public class Game {
 	public void nextTurn() {//sets next turn;
 		if (nextPlayerSkip == false) {
 			if (!reverse) {
-				turn = ++turn%NUM_PLAYERS;
+				turn = ++turn % NUM_PLAYERS;
 				} else {
 				turn = --turn % NUM_PLAYERS;
 			}
