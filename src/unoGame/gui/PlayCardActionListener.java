@@ -32,6 +32,7 @@ public class PlayCardActionListener implements ActionListener {
 						+ card.getNumber();
 				out.writeObject(message);
 				out.flush();// flush the stream so that the data gets sent\
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

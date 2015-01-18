@@ -21,7 +21,7 @@ public class Screen extends JFrame{
     private PlayersCardsPanel playersCardsPanel;
     private JPanel currentPlayer;
     private JLabel player;
-    private UpdatesPanel activityLogPanel;
+    private UpdatesPanel updatesPanel;
     private boolean isMyTurn;
     private SocketOutStream socket;
     private int myPlayerIndex;
@@ -45,10 +45,11 @@ public class Screen extends JFrame{
         pickCardsPanel = new PickCardsPanel(isMyTurn, pickCardsActionListener);
 
         allPlayersPanel = new AllPlayersPanel(screenShot.playersInfo, screenShot.isInAscendingOrder);
+        
+        updatesPanel = new UpdatesPanel();
 
         playersCardsPanel = new PlayersCardsPanel(isMyTurn, screenShot, socket);
 
-        activityLogPanel = new UpdatesPanel();
         currentPlayer = new JPanel();
         player = new JLabel(screenShot.playersInfo[screenShot.currentPlayerIndex].name + "\'s turn");
         player.setFont(new Font("verdana", Font.BOLD, 25));
@@ -69,7 +70,7 @@ public class Screen extends JFrame{
         add(pickCardsPanel, BorderLayout.CENTER);
         add(allPlayersPanel);
         add(playersCardsPanel, BorderLayout.SOUTH);
-        add(activityLogPanel, BorderLayout.EAST);
+        add(updatesPanel, BorderLayout.EAST);
         setVisible(true);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -87,17 +88,34 @@ public class Screen extends JFrame{
            isMyTurn=true;
             pickCardsPanel.update(isMyTurn);
             topCardPanel.setTopCard(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
-            allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder);
+            allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder, screenShot.currentPlayerIndex);
             playersCardsPanel.update(screenShot.myCards, screenShot.topCard);
-            player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
+            
             playersCardsPanel.enableCards(isMyTurn);
-       
+            
+            
+            if(screenShot.drawCard){
+            	updatesPanel.update(player.getText().split("'")[0], "drew a card");
+            }
+            if(screenShot.playedCard){
+            	updatesPanel.update(player.getText().split("'")[0], screenShot.topCard.toUpdatesString());
+            }
+            
+            player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
         }else{
             pickCardsPanel.update(isMyTurn);
            	topCardPanel.setTopCard(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
-            allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder);
-            player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
+            allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder, screenShot.currentPlayerIndex );
             playersCardsPanel.enableCards(isMyTurn);
+            
+            if(screenShot.drawCard){
+            	updatesPanel.update(player.getText().split("'")[0], "drew a card");
+            }
+            if(screenShot.playedCard){
+            	updatesPanel.update(player.getText().split("'")[0], screenShot.topCard.toUpdatesString());
+            }
+            
+            player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
        
         }
 

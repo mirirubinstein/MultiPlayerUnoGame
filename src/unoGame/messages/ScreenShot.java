@@ -16,6 +16,8 @@ public class ScreenShot implements Serializable {
     public int currentPlayerIndex;
     public Card topCard;
     public boolean isInAscendingOrder;
-    public int myPlayerIndex;    
+    public int myPlayerIndex;   
+    public boolean playedCard;
+    public boolean drawCard;
     
 }

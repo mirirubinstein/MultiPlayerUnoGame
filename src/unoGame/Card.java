@@ -36,6 +36,10 @@ public class Card implements Serializable{
     public String toString() {
         return "Card [cardType=" + cardColor + ", number=" + number + "]";
     }
+    
+    public String toUpdatesString() {
+        return "Card [" + cardColor + " " + numberToString() + "]";
+    }
 
     public String numberToString() {
         if (number > 9) {

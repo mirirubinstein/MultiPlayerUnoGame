@@ -53,11 +53,11 @@ public class SocketHandler extends Thread {
 					// game.getPlayers().get(game.getTurn()).getHand()[6] + "\n"
 					// + game.getPlayers().get(game.getTurn()).getHand()[7]);
 					// need to refresh screen data
-					sendScreenShot();
+					sendScreenShot(false, false);
 
 					game.nextTurn();
 
-					sendScreenShot();
+					sendScreenShot(false, true);
 
 				} else if (factory.getMessage(line).split(" ")[0].trim()
 						.equals("PLAY_CARD")) {
@@ -68,7 +68,7 @@ public class SocketHandler extends Thread {
 							Integer.parseInt(number));
 				
 					game.getPlayers().get(game.getTurn()).removeCardFromHand(c);
-					sendScreenShot();
+					sendScreenShot(false, false);
 
 					game.getPlayingPile().push(c);
 					
@@ -83,7 +83,7 @@ public class SocketHandler extends Thread {
 						case 10:
 							game.setNextPlayerSkip(true);
 							game.nextTurn();
-							sendScreenShot();
+							sendScreenShot(false, false);
 							game.setNextPlayerSkip(false);
 							break;
 						case 11:
@@ -106,7 +106,7 @@ public class SocketHandler extends Thread {
 						}
 
 					
-					sendScreenShot();
+					sendScreenShot(true, false);
 					
 				} else {
 					game.addPlayer(factory.getMessage(line));
@@ -116,7 +116,7 @@ public class SocketHandler extends Thread {
 							game.getPlayers().size() - 1);
 					shot = getScreenShotData(p2);
 					messages.add(shot);
-					sendScreenShot();
+					sendScreenShot(false, false);
 				}
 
 			}
@@ -160,9 +160,11 @@ public class SocketHandler extends Thread {
 		return null;
 	}
 
-	public void sendScreenShot() throws EmptyPileException {
+	public void sendScreenShot(boolean played, boolean draw) throws EmptyPileException {
 		Player p = game.getPlayers().get(game.getTurn());
 		ScreenShot shot = getScreenShotData(p);
+		shot.drawCard =draw;
+		shot.playedCard = played;
 		messages.add(shot);
 	}
 }

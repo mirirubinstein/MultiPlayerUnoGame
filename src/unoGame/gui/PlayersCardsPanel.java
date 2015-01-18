@@ -84,6 +84,7 @@ public class PlayersCardsPanel extends JPanel {
         cardsPanel.removeAll();
         addCardsToPanel(cards, topCard);
         cardsPanel.revalidate();
+        cardsPanel.repaint();
      
     }
     	public void enableCards(boolean turn){
