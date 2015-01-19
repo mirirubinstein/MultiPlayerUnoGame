@@ -16,7 +16,12 @@ public class UnoMessageFactory {
 			String color =  scanner.next();
 			String number = scanner.next();
 			return messageType + " " + color + " " + number ;
+		case "UNO":
+			String num = scanner.next();
+			return messageType + " "  + num;
+		
 		}
+		
 		
 		return null;
 	}
