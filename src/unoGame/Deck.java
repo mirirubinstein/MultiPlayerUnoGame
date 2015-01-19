@@ -62,15 +62,25 @@ public class Deck {
 	}
 
 	// deal top card
-	public Card dealCard(){
+	public Card dealCard(CardPile pile){
+		if(this.isEmpty()){
+			resetDeck(pile);
+		}
+		if(cards.size()<4){
+			//let users no there are no cards to deal if <4 cards in deck
+			System.out.println("Cant deal");
+			throw new IndexOutOfBoundsException();
+		}	
+		
 		Card card  = cards.remove(cards.size() - 1);
 		return card;
+		
 		
 	}
 	public void resetDeck(CardPile pile){
 		try{
-			while(!pile.isEmpty()){
-			cards.add(pile.pop());
+			while(pile.getElements().size()>1){
+				cards.add(pile.pop());
 			}
 		}catch(EmptyPileException e){
 			return;

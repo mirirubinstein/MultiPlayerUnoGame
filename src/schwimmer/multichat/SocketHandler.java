@@ -2,6 +2,7 @@ package schwimmer.multichat;
 
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 import unoGame.Card;
@@ -41,76 +42,115 @@ public class SocketHandler extends Thread {
 			Player p;
 			ScreenShot shot;
 
-			while ((line = (String) objectIn.readObject()) != null) {
+			while ((line = (String) objectIn.readObject()) != null && !game.isGameOver()) {
 				listener.onMessage(s.getSocket(), line);
 
 				UnoMessageFactory factory = new UnoMessageFactory();
 				if (factory.getMessage(line).trim().equals("DRAW")) {
-					Card c = game.getDeck().dealCard();
+					if (game.getDeck().isEmpty()) {
+						Card c = game.getPlayingPile().pop();
+						game.getDeck().resetDeck(game.getPlayingPile());
+						game.getPlayingPile().push(c);
+					}
+					Card c = game.getDeck().dealCard(game.getPlayingPile());
 					// add card to players hand
 					game.getPlayers().get(game.getTurn()).pickCard(c);
-					// System.out.println("My Cards: " +
-					// game.getPlayers().get(game.getTurn()).getHand()[6] + "\n"
-					// + game.getPlayers().get(game.getTurn()).getHand()[7]);
+					game.getPlayers().get(game.getTurn()).setCalledUno(false);
 					// need to refresh screen data
 					sendScreenShot(false, false);
 
 					game.nextTurn();
 
 					sendScreenShot(false, true);
-
+				} else if (factory.getMessage(line).split(" ")[0].trim()
+						.equals("UNO")) {
+					String numPlayer = factory.getMessage(line).split(" ")[1];
+					Player p2 = game.getPlayers().get(
+							Integer.parseInt(numPlayer));
+					
+					if (p2.getNumCardsInHand() == 1) {
+						System.out.println("caaled uno");
+						p2.callUno();
+					} else {
+						List<Player> allPlayers = game.getPlayers();
+						for (int i = 0; i < allPlayers.size(); i++) {
+							if (allPlayers.get(i).getNumCardsInHand() == 1
+									&& !allPlayers.get(i).getCalledUno()) {
+								int currentTurn = game.getTurn();
+								allPlayers.get(i).pickCard(
+										game.getDeck().dealCard(
+												game.getPlayingPile()));
+								allPlayers.get(i).pickCard(
+										game.getDeck().dealCard(
+												game.getPlayingPile()));
+								game.setTurn(i);
+								sendScreenShot(false, false);
+								game.setTurn(currentTurn);
+								sendScreenShot(false, false);
+							}
+						}
+					}
 				} else if (factory.getMessage(line).split(" ")[0].trim()
 						.equals("PLAY_CARD")) {
 					String color = factory.getMessage(line).split(" ")[1];
 					String number = factory.getMessage(line).split(" ")[2];
-					
+
 					Card c = new Card(stringToColor(color),
 							Integer.parseInt(number));
-				
+
 					game.getPlayers().get(game.getTurn()).removeCardFromHand(c);
 					sendScreenShot(false, false);
 
 					game.getPlayingPile().push(c);
-					
-					// case 13:
-					// game.nextTurn();
-					// System.out.println("IT works!"+number);
-					// break;
-					
 
-						switch (Integer.parseInt(number)) {
+					if(game.getPlayers().get(game.getTurn()).getNumCardsInHand() == 0){
+						game.setWinner(game.getTurn());
+						game.setGameOver(true);
+						//send info to action panel
+					}
 
-						case 10:
-							game.setNextPlayerSkip(true);
-							game.nextTurn();
-							sendScreenShot(false, false);
-							game.setNextPlayerSkip(false);
-							break;
-						case 11:
-							game.setReverse(!game.getReverse());
-							game.nextTurn();
-							break;
-						case 12:
-						//	game.draw(4);
-						//	break;
-						case 13:
-						//	game.draw(2);
-						//	game.nextTurn();
-							break;
-						case 14: 
-							//nothing, go again
-							break;
-						default:
-							game.nextTurn();
-							break;
-						}
+					switch (Integer.parseInt(number)) {
 
-					
+					case 10:// skip next turn
+						game.setNextPlayerSkip(true);
+						game.nextTurn();
+						sendScreenShot(false, false);
+						game.setNextPlayerSkip(false);
+						break;
+					case 11:// reverse
+						game.setReverse(!game.getReverse());
+						game.nextTurn();
+						break;
+					case 12:// draw 2
+						game.draw(2);
+						game.nextTurn();
+						sendScreenShot(false, false);
+						game.nextTurn();
+						game.setNextPlayerSkip(false);
+						break;
+					case 13:// draw 4
+						int currentTurn = game.getTurn();
+						game.draw(4);
+						game.nextTurn();
+						sendScreenShot(false, false);
+						game.setTurn(currentTurn);
+						game.setNextPlayerSkip(true);
+						break;
+					case 14:
+						// nothing, go again
+						break;
+					default:
+						game.nextTurn();
+						game.setNextPlayerSkip(false);
+						break;
+					}
+
 					sendScreenShot(true, false);
 					
+
 				} else {
 					game.addPlayer(factory.getMessage(line));
-					
+
 					// send screen shot of last player that joined
 					Player p2 = game.getPlayers().get(
 							game.getPlayers().size() - 1);
@@ -160,10 +200,11 @@ public class SocketHandler extends Thread {
 		return null;
 	}
 
-	public void sendScreenShot(boolean played, boolean draw) throws EmptyPileException {
+	public void sendScreenShot(boolean played, boolean draw)
+			throws EmptyPileException {
 		Player p = game.getPlayers().get(game.getTurn());
 		ScreenShot shot = getScreenShotData(p);
-		shot.drawCard =draw;
+		shot.drawCard = draw;
 		shot.playedCard = played;
 		messages.add(shot);
 	}

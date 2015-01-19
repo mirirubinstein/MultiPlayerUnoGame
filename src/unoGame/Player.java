@@ -62,4 +62,10 @@ public class Player {
 		return calledUno;
 	}
 
+	public void setCalledUno(boolean b) {
+		// TODO Auto-generated method stub
+		calledUno = b;
+		
+	}
+
 }

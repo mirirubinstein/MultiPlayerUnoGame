@@ -51,7 +51,7 @@ public class PlayersCardsPanel extends JPanel {
         cardUnoPanel.add(CardsScroller);
 
         add(cardUnoPanel);
-        uno.addActionListener(new UnoActionListener());
+        uno.addActionListener(new UnoActionListener(socket, screenShot.playersInfo.length-1));
         setVisible(true);
     }
 
@@ -77,6 +77,7 @@ public class PlayersCardsPanel extends JPanel {
         cardButton.addActionListener(new PlayCardActionListener(socket, card, topCard));
         return cardButton;
     }
+    
 
     public void update(Card[] cards, Card topCard) {
         //logic is not right needs to be changed

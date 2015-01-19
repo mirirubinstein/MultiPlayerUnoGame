@@ -33,12 +33,12 @@ public class Game {
 		for (int i = 0; i < 7; i++) // deal out 7 cards to each player
 		{
 			for (int j = 0; j < NUM_PLAYERS; j++) {
-				players.get(j).pickCard(deck.dealCard());
+				players.get(j).pickCard(deck.dealCard(playingPile));
 			}
 		}
 		// get base card to start with
 		do {
-			playingPile.push(deck.dealCard());
+			playingPile.push(deck.dealCard(playingPile));
 			// lays down cards until the first card to play on is a regular
 			// number card.
 		} while ((playingPile.peek().getColor().equals(Color.BLACK)) || (playingPile.peek().getNumber() > 9));
@@ -69,7 +69,7 @@ public class Game {
 		}
 		// need to figure out how were going to play a turn
 		// player chooses card and puts on deck. or they draw a card
-		player.pickCard(deck.dealCard());
+		player.pickCard(deck.dealCard(playingPile));
 		// OR
 		Card cardChosen = player.seeThisCardFromHand(0);// parameter is the
 														// index of the card in
@@ -115,7 +115,7 @@ public class Game {
 				// move was invalid
 			}
 		} catch (EmptyPileException e) {
-			playingPile.push(deck.dealCard());
+			playingPile.push(deck.dealCard(playingPile));
 		}
 		// pass control to the next player
 		if (gameOver == false) {
@@ -155,16 +155,22 @@ public class Game {
 			}
 		}
 	}
-
+	
 	public void draw(int drawCards) {
-		for (int i = 0; i < drawCards; i++) {
-			if (reverse) {
-				players.get((turn - 1) % NUM_PLAYERS).pickCard(deck.dealCard());
-				nextPlayerSkip = true;
-			} else {
-				players.get((turn + 1) % NUM_PLAYERS).pickCard(deck.dealCard());
-				nextPlayerSkip = true;
+		int choose;
+		if (!reverse) {
+			choose = (turn + 1) % NUM_PLAYERS;
+			if (choose < 0) {
+				choose += NUM_PLAYERS;
 			}
+		} else {
+			choose = (turn - 1) % NUM_PLAYERS;
+			if (choose < 0) {
+				choose += NUM_PLAYERS;
+			}
+		}
+		for (int i = 0; i < drawCards; i++) {
+			players.get(choose).pickCard(deck.dealCard(playingPile));
 		}
 	}
 
@@ -239,7 +245,7 @@ public class Game {
 	public void addPlayer(String name) {
 		Player p = new Player(name);
 		for (int i = 0; i < 7; i++) {
-			p.pickCard(deck.dealCard());
+			p.pickCard(deck.dealCard(playingPile));
 		}
 		players.add(p);
 		NUM_PLAYERS++;
