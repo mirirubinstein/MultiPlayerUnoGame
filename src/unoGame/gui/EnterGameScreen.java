@@ -55,7 +55,7 @@ public class EnterGameScreen extends JFrame {
 
 	public Screen switchToPlayingGameJFrame(ScreenShot screenShot) {
 		Screen screen = new Screen(screenShot, name.getText(), socketStream);
-		screen.setMyPlayerIndex(screenShot.playersInfo.length-1);
+		screen.setMyPlayerIndex(screenShot.getPlayersInfo().length-1);
 		setVisible(false);
 		return screen;
 	}

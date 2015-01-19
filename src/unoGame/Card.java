@@ -38,7 +38,7 @@ public class Card implements Serializable{
     }
     
     public String toUpdatesString() {
-        return "Card [" + cardColor + " " + numberToString() + "]";
+        return cardColor + " " + numberToString();
     }
 
     public String numberToString() {

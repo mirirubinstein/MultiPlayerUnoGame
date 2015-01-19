@@ -124,7 +124,7 @@ public class SocketHandler extends Thread {
 					case 12:// draw 2
 						game.draw(2);
 						game.nextTurn();
-						sendScreenShot(false, false);
+						sendScreenShot(true, false);
 						game.nextTurn();
 						game.setNextPlayerSkip(false);
 						break;
@@ -132,7 +132,7 @@ public class SocketHandler extends Thread {
 						int currentTurn = game.getTurn();
 						game.draw(4);
 						game.nextTurn();
-						sendScreenShot(false, false);
+						sendScreenShot(true, false);
 						game.setTurn(currentTurn);
 						game.setNextPlayerSkip(true);
 						break;
@@ -170,11 +170,11 @@ public class SocketHandler extends Thread {
 
 	private ScreenShot getScreenShotData(Player p) throws EmptyPileException {
 		ScreenShot s = new ScreenShot();
-		s.myCards = p.getHand();
-		s.currentPlayerIndex = game.getTurn();
-		s.topCard = game.getPlayingPile().peek();
-		s.isInAscendingOrder = game.isReverse();
-		s.myPlayerIndex = game.getPlayers().size() - 1;
+		s.setMyCards( p.getHand()) ;
+		s.setCurrentPlayerIndex(game.getTurn());
+		s.setTopCard(game.getPlayingPile().peek());
+		s.setInAscendingOrder(game.isReverse());
+		s.setMyPlayerIndex(game.getPlayers().size() - 1);
 
 		ArrayList<Player> players = game.getPlayers();
 		PlayerBasicInfo[] list = new PlayerBasicInfo[players.size()];
@@ -182,7 +182,7 @@ public class SocketHandler extends Thread {
 			list[i] = new PlayerBasicInfo(players.get(i).getName(), players
 					.get(i).getNumCardsInHand(), players.get(i).getCalledUno());
 		}
-		s.playersInfo = list;
+		s.setPlayersInfo(list);
 		return s;
 	}
 
@@ -204,8 +204,8 @@ public class SocketHandler extends Thread {
 			throws EmptyPileException {
 		Player p = game.getPlayers().get(game.getTurn());
 		ScreenShot shot = getScreenShotData(p);
-		shot.drawCard = draw;
-		shot.playedCard = played;
+		shot.setDrawCard(draw);
+		shot.setPlayedCard(played);
 		messages.add(shot);
 	}
 }

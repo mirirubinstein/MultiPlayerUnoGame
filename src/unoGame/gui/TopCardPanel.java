@@ -10,9 +10,10 @@ public class TopCardPanel extends JPanel {
         setTopCard(color, sign);
         cardPile.setPreferredSize(new Dimension(100, 150));
         cardPile.setEnabled(false);
-        cardPile.setFont(new Font("verdana", Font.BOLD, 18));
+        cardPile.setFont(new Font("verdana", Font.BOLD, 8));
         add(cardPile);
         setVisible(true);
+        setOpaque(false);
     }
 
 

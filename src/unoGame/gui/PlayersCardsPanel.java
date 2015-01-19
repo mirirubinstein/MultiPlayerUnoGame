@@ -29,7 +29,7 @@ public class PlayersCardsPanel extends JPanel {
         this.isMyTurn = isMyTurn;
         this.socket = socket;
         this.screenShot = screenShot; 
-        setCards(screenShot.myCards, screenShot.topCard);
+        setCards(screenShot.getMyCards(), screenShot.getTopCard());
         
         
         
@@ -51,7 +51,7 @@ public class PlayersCardsPanel extends JPanel {
         cardUnoPanel.add(CardsScroller);
 
         add(cardUnoPanel);
-        uno.addActionListener(new UnoActionListener(socket, screenShot.playersInfo.length-1));
+        uno.addActionListener(new UnoActionListener(socket, screenShot.getPlayersInfo().length-1));
         setVisible(true);
     }
 
@@ -67,7 +67,7 @@ public class PlayersCardsPanel extends JPanel {
         cardButton.setForeground(Color.BLACK);
         cardButton.setText(card.numberToString());
         cardButton.setEnabled(isMyTurn);
-        cardButton.setFont(new Font("Verdana", Font.BOLD, 24));
+        cardButton.setFont(new Font("Verdana", Font.BOLD, 10));
         cardButton.setBackground(card.getColor().getColor());
         if (card.getColor().equals(CardColor.BLACK)) {
             cardButton.setForeground(Color.WHITE);

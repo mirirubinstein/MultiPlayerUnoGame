@@ -15,9 +15,10 @@ public class PickCardsPanel extends JPanel {
         pick.setPreferredSize(new Dimension(100, 150));
         pick.setEnabled(isMyTurn);
         pick.addActionListener(PickCardsActionListener);
-        pick.setFont(new Font("verdana", Font.BOLD, 18));
+        pick.setFont(new Font("verdana", Font.BOLD, 8));
         add(pick);
         setVisible(true);
+        setOpaque(false);
     }
 
     public void update(boolean isMyTurn) {

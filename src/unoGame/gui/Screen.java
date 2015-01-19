@@ -31,9 +31,9 @@ public class Screen extends JFrame{
 
         this.setTitle((playersName));
 
-        topCardPanel = new TopCardPanel(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
+        topCardPanel = new TopCardPanel(screenShot.getTopCard().getColor().getColor(), screenShot.getTopCard().numberToString());
 
-        if(screenShot.currentPlayerIndex == screenShot.myPlayerIndex){
+        if(screenShot.getCurrentPlayerIndex() == screenShot.getMyPlayerIndex()){
             isMyTurn=true;
             
         }else{
@@ -44,14 +44,14 @@ public class Screen extends JFrame{
 
         pickCardsPanel = new PickCardsPanel(isMyTurn, pickCardsActionListener);
 
-        allPlayersPanel = new AllPlayersPanel(screenShot.playersInfo, screenShot.isInAscendingOrder);
+        allPlayersPanel = new AllPlayersPanel(screenShot.getPlayersInfo(), screenShot.isInAscendingOrder());
         
         updatesPanel = new UpdatesPanel();
 
         playersCardsPanel = new PlayersCardsPanel(isMyTurn, screenShot, socket);
 
         currentPlayer = new JPanel();
-        player = new JLabel(screenShot.playersInfo[screenShot.currentPlayerIndex].name + "\'s turn");
+        player = new JLabel(screenShot.getPlayersInfo()[screenShot.getCurrentPlayerIndex()].name + "\'s turn");
         player.setFont(new Font("verdana", Font.BOLD, 25));
 
         topCardPanel.setBounds(500, 300, 250, 300);
@@ -84,38 +84,38 @@ public class Screen extends JFrame{
 
     public void update(ScreenShot screenShot) {
     	isMyTurn = false;
-        if(screenShot.currentPlayerIndex == myPlayerIndex){
+        if(screenShot.getCurrentPlayerIndex() == myPlayerIndex){
            isMyTurn=true;
             pickCardsPanel.update(isMyTurn);
-            topCardPanel.setTopCard(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
-            allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder, screenShot.currentPlayerIndex);
-            playersCardsPanel.update(screenShot.myCards, screenShot.topCard);
+            topCardPanel.setTopCard(screenShot.getTopCard().getColor().getColor(), screenShot.getTopCard().numberToString());
+            allPlayersPanel.update(screenShot.getPlayersInfo(), screenShot.isInAscendingOrder(), screenShot.getCurrentPlayerIndex());
+            playersCardsPanel.update(screenShot.getMyCards(), screenShot.getTopCard());
             
             playersCardsPanel.enableCards(isMyTurn);
             
             
-            if(screenShot.drawCard){
+            if(screenShot.isDrawCard()){
             	updatesPanel.update(player.getText().split("'")[0], "drew a card");
             }
-            if(screenShot.playedCard){
-            	updatesPanel.update(player.getText().split("'")[0], screenShot.topCard.toUpdatesString());
+            if(screenShot.isPlayedCard()){
+            	updatesPanel.update(player.getText().split("'")[0], screenShot.getTopCard().toUpdatesString());
             }
             
-            player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
+            player.setText(screenShot.getPlayersInfo()[screenShot.getCurrentPlayerIndex()].getName() + "\'s turn");
         }else{
             pickCardsPanel.update(isMyTurn);
-           	topCardPanel.setTopCard(screenShot.topCard.getColor().getColor(), screenShot.topCard.numberToString());
-            allPlayersPanel.update(screenShot.playersInfo, screenShot.isInAscendingOrder, screenShot.currentPlayerIndex );
+           	topCardPanel.setTopCard(screenShot.getTopCard().getColor().getColor(), screenShot.getTopCard().numberToString());
+            allPlayersPanel.update(screenShot.getPlayersInfo(), screenShot.isInAscendingOrder(), screenShot.getCurrentPlayerIndex() );
             playersCardsPanel.enableCards(isMyTurn);
             
-            if(screenShot.drawCard){
+            if(screenShot.isDrawCard()){
             	updatesPanel.update(player.getText().split("'")[0], "drew a card");
             }
-            if(screenShot.playedCard){
-            	updatesPanel.update(player.getText().split("'")[0], screenShot.topCard.toUpdatesString());
+            if(screenShot.isPlayedCard()){
+            	updatesPanel.update(player.getText().split("'")[0], screenShot.getTopCard().toUpdatesString());
             }
             
-            player.setText(screenShot.playersInfo[screenShot.currentPlayerIndex].getName() + "\'s turn");
+            player.setText(screenShot.getPlayersInfo()[screenShot.getCurrentPlayerIndex()].getName() + "\'s turn");
        
         }
 

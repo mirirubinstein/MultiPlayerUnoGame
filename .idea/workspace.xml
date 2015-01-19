@@ -1,38 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0a2ae26-d8d7-461e-a7d8-b779bd035764" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/schwimmer/multichat/MessageSenderThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/schwimmer/multichat/MultiChatServer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/schwimmer/multichat/ServerLogFrame.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/schwimmer/multichat/SocketEventListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/schwimmer/multichat/SocketHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/schwimmer/multichat/SocketInStream.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/schwimmer/multichat/SocketOutStream.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/Card.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/CardColor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/CardPile.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/Deck.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/EmptyPileException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/Game.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/InvalidMoveException.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/ListeningThread.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/Main.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/Player.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/PlayerBasicInfo.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/AllPlayersPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/EnterGameScreen.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/OtherPlayerActionListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/PickCardsActionListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/PickCardsPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/PlayCardActionListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/PlayersCardsPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/Screen.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/TopCardPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/UnoActionListener.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/gui/UpdatesPanel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/messages/ScreenShot.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/unoGame/messages/UnoMessageFactory.java" afterPath="" />
+    <list default="true" id="f0a2ae26-d8d7-461e-a7d8-b779bd035764" name="Default" comment="Changed the updates panel to have the newest played card on top, switched a bunch of other stuff">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/Card.java" afterPath="$PROJECT_DIR$/src/unoGame/Card.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/EnterGameScreen.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/EnterGameScreen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MultiPlayerUnoGame.iml" afterPath="$PROJECT_DIR$/MultiPlayerUnoGame.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/PickCardsPanel.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/PickCardsPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/PlayersCardsPanel.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/PlayersCardsPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/Screen.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/Screen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/messages/ScreenShot.java" afterPath="$PROJECT_DIR$/src/unoGame/messages/ScreenShot.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/schwimmer/multichat/SocketHandler.java" afterPath="$PROJECT_DIR$/src/schwimmer/multichat/SocketHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/TopCardPanel.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/TopCardPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/UpdatesPanel.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/UpdatesPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MultiPlayerUnoGame.iws" />
@@ -57,38 +36,7 @@
     <favorites_list name="MultiPlayerUnoGame" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="ScreenShot.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Downloads/MultiPlayerUnoGame-master 3/src/unoGame/messages/ScreenShot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ListeningThread.java" pinned="false" current-in-tab="true">
-        <entry file="file://$USER_HOME$/Downloads/MultiPlayerUnoGame-master 3/src/unoGame/ListeningThread.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.80349344" vertical-offset="367" max-vertical-offset="825">
-              <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UnoMessageFactory.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Downloads/MultiPlayerUnoGame-master 3/src/unoGame/messages/UnoMessageFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Push.Settings">
     <option name="myUpdateMethod" value="REBASE" />
@@ -188,6 +136,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="MultiPlayerUnoGame" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MultiPlayerUnoGame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MultiPlayerUnoGame" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -477,7 +435,13 @@
       <option name="project" value="LOCAL" />
       <updated>1421710124173</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Changed the updates panel to have the newest played card on top, switched a bunch of other stuff">
+      <created>1421710203164</created>
+      <option name="number" value="00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1421710203164</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -561,13 +525,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$USER_HOME$/Downloads/MultiPlayerUnoGame-master 3/src/unoGame/gui/Screen.java</url>
+          <url>file://$PROJECT_DIR$/src/unoGame/gui/Screen.java</url>
           <line>95</line>
           <properties />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$USER_HOME$/Downloads/MultiPlayerUnoGame-master 3/src/unoGame/gui/Screen.java</url>
+          <url>file://$PROJECT_DIR$/src/unoGame/gui/Screen.java</url>
           <line>99</line>
           <properties />
           <option name="timeStamp" value="9" />
@@ -614,15 +578,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/MultiPlayerUnoGame-master 3/src/unoGame/messages/ScreenShot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/MultiPlayerUnoGame-master 3/src/unoGame/messages/UnoMessageFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/unoGame/messages/UnoMessageFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
           <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
@@ -630,10 +586,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Downloads/MultiPlayerUnoGame-master 3/src/unoGame/ListeningThread.java">
+    <entry file="file://$PROJECT_DIR$/src/unoGame/ListeningThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80349344" vertical-offset="367" max-vertical-offset="825">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.1812227" vertical-offset="457" max-vertical-offset="915">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/unoGame/messages/ScreenShot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22925764" vertical-offset="60" max-vertical-offset="1755">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
           <folding />
         </state>
       </provider>
