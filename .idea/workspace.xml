@@ -471,7 +471,13 @@
       <option name="project" value="LOCAL" />
       <updated>1421710059063</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Changed the updates panel to have the newest played card on top, switched a bunch of other stuff">
+      <created>1421710124173</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1421710124173</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
