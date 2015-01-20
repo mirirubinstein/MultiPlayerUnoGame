@@ -4,6 +4,7 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Scanner;
 
 import unoGame.Card;
 import unoGame.CardColor;
@@ -12,7 +13,6 @@ import unoGame.Game;
 import unoGame.Player;
 import unoGame.PlayerBasicInfo;
 import unoGame.messages.ScreenShot;
-import unoGame.messages.UnoMessageFactory;
 
 public class SocketHandler extends Thread {
 
@@ -20,6 +20,7 @@ public class SocketHandler extends Thread {
 	private Queue<Object> messages;
 	private SocketEventListener listener;
 	private Game game;
+	private int MAX_PLAYERS = 5;
 
 	public SocketHandler(SocketInStream socket, SocketEventListener listener,
 			Queue<Object> messages, Game game) {
@@ -33,20 +34,20 @@ public class SocketHandler extends Thread {
 	public void run() {
 
 		try {
-			// InputStream in = s.getInputStream();
-			// BufferedReader reader = new BufferedReader(new
-			// InputStreamReader(in));
+		
 			ObjectInputStream objectIn = s.getIn();
 
 			String line;
 			Player p;
 			ScreenShot shot;
-
-			while ((line = (String) objectIn.readObject()) != null && !game.isGameOver()) {
+			Scanner scanner;
+			
+			while ((line = (String) objectIn.readObject()) != null && !game.isGameOver() && game.getNUM_PLAYERS() <= MAX_PLAYERS - 1) {
 				listener.onMessage(s.getSocket(), line);
 
-				UnoMessageFactory factory = new UnoMessageFactory();
-				if (factory.getMessage(line).trim().equals("DRAW")) {
+				scanner = new Scanner(line);
+				String message = scanner.next();
+				if (message.equals("DRAW")) {
 					if (game.getDeck().isEmpty()) {
 						Card c = game.getPlayingPile().pop();
 						game.getDeck().resetDeck(game.getPlayingPile());
@@ -62,14 +63,12 @@ public class SocketHandler extends Thread {
 					game.nextTurn();
 
 					sendScreenShot(false, true);
-				} else if (factory.getMessage(line).split(" ")[0].trim()
-						.equals("UNO")) {
-					String numPlayer = factory.getMessage(line).split(" ")[1];
+				} else if (message.equals("UNO")) {
+					String numPlayer = scanner.next();
 					Player p2 = game.getPlayers().get(
 							Integer.parseInt(numPlayer));
 					
 					if (p2.getNumCardsInHand() == 1) {
-						System.out.println("caaled uno");
 						p2.callUno();
 					} else {
 						List<Player> allPlayers = game.getPlayers();
@@ -90,10 +89,9 @@ public class SocketHandler extends Thread {
 							}
 						}
 					}
-				} else if (factory.getMessage(line).split(" ")[0].trim()
-						.equals("PLAY_CARD")) {
-					String color = factory.getMessage(line).split(" ")[1];
-					String number = factory.getMessage(line).split(" ")[2];
+				} else if (message.equals("PLAY_CARD")) {
+					String color = scanner.next();
+					String number = scanner.next();
 
 					Card c = new Card(stringToColor(color),
 							Integer.parseInt(number));
@@ -149,7 +147,8 @@ public class SocketHandler extends Thread {
 					
 
 				} else {
-					game.addPlayer(factory.getMessage(line));
+					if(game.getNUM_PLAYERS() <= MAX_PLAYERS - 1){
+					game.addPlayer(scanner.next());
 
 					// send screen shot of last player that joined
 					Player p2 = game.getPlayers().get(
@@ -157,6 +156,8 @@ public class SocketHandler extends Thread {
 					shot = getScreenShotData(p2);
 					messages.add(shot);
 					sendScreenShot(false, false);
+					
+					}
 				}
 
 			}

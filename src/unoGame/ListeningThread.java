@@ -36,7 +36,7 @@ public class ListeningThread extends Thread {
 			while ((o = (Object) s.readObject()) != null) {
 				ss = (ScreenShot)o;
 				if(newGame){
-					playingScreen = screen.switchToPlayingGameJFrame(ss);//need to get actual name	
+					playingScreen = screen.switchToPlayingGameJFrame(ss);
 					newGame = false;
 				}
 				else{

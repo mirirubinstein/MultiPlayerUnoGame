@@ -32,6 +32,8 @@ public class EnterGameScreen extends JFrame {
 	JLabel playerName = new JLabel("Your Name :");
 	JTextField masterName = new JTextField(15);
 	JTextField name = new JTextField(15);
+	JLabel message = new JLabel();
+	JLabel message2 = new JLabel();
 
 	public EnterGameScreen() {
 		Panel panel = new Panel();
@@ -46,6 +48,8 @@ public class EnterGameScreen extends JFrame {
 		panel.add(name);
 		join.setFont(new Font("verdana", Font.BOLD, 22));
 		panel.add(join).setSize(100, 500);
+		panel.add(message).setFont(new Font("verdana", Font.BOLD, 16));
+		panel.add(message2).setFont(new Font("verdana", Font.BOLD, 16));
 
 		setSize(330, 370);
 		setLocationRelativeTo(null);
@@ -67,6 +71,11 @@ public class EnterGameScreen extends JFrame {
 				join(masterName.getText(), name.getText());
 				join.setEnabled(false);
 				join.setText("Please wait...");
+				
+				message.setText("Game has max number of players,");
+				message2.setText("unable to join game.");
+				
+				
 			}
 		});
 		setVisible(true);
