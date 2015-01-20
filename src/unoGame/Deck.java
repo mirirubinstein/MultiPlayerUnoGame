@@ -62,33 +62,36 @@ public class Deck {
 	}
 
 	// deal top card
-	public Card dealCard(CardPile pile){
-		if(this.isEmpty()){
-			resetDeck(pile);
+	public Card dealCard(CardPile pile) {
+		Card card = null;
+		if (this.isEmpty()) {
+			try {
+				resetDeck(pile);
+			} catch (EmptyPileException e) {
+				// couldn't pop
+			}
 		}
-		if(cards.size()<4){
-			//let users no there are no cards to deal if <4 cards in deck
-			System.out.println("Cant deal");
-			throw new IndexOutOfBoundsException();
-		}	
-		
-		Card card  = cards.remove(cards.size() - 1);
+		try {
+			card = cards.remove(cards.size() - 1);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			// stop user from dealing card from deck
+		}
 		return card;
-		
-		
+
 	}
-	public void resetDeck(CardPile pile){
-		try{
-			while(pile.getElements().size()>1){
+
+	public void resetDeck(CardPile pile) throws EmptyPileException {
+		if (pile.getElements().size() > 1) {
+			while (pile.getElements().size() > 1) {
 				cards.add(pile.pop());
 			}
-		}catch(EmptyPileException e){
-			return;
+		} else {
+			// stop user from dealing card from deck
 		}
 	}
 
 	public boolean isEmpty() {
-		//cant wait till its 0 in case someone has a draw 4
+		// cant wait till its 0 in case someone has a draw 4
 		return cards.size() <= 4;
 	}
 

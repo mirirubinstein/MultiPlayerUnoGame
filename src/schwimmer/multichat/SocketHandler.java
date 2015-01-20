@@ -48,11 +48,6 @@ public class SocketHandler extends Thread {
 				scanner = new Scanner(line);
 				String message = scanner.next();
 				if (message.equals("DRAW")) {
-					if (game.getDeck().isEmpty()) {
-						Card c = game.getPlayingPile().pop();
-						game.getDeck().resetDeck(game.getPlayingPile());
-						game.getPlayingPile().push(c);
-					}
 					Card c = game.getDeck().dealCard(game.getPlayingPile());
 					// add card to players hand
 					game.getPlayers().get(game.getTurn()).pickCard(c);
