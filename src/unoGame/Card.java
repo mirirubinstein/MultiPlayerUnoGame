@@ -57,7 +57,6 @@ public class Card implements Serializable{
 
     public boolean canPlay(Card otherCard) {
        if ( cardColor == otherCard.getColor() || number == otherCard.getNumber()|| otherCard.cardColor == CardColor.BLACK ||otherCard.cardColor == CardColor.BLACK ||cardColor == CardColor.BLACK )   {
-    	  System.out.println("TRUE");
     	   return true;
         } else {
             return false;

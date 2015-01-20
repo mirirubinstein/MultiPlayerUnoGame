@@ -47,7 +47,8 @@ public class SocketHandler extends Thread {
 
 				scanner = new Scanner(line);
 				String message = scanner.next();
-				if (message.equals("DRAW")) {
+				switch(message){
+				case "DRAW":
 					Card c = game.getDeck().dealCard(game.getPlayingPile());
 					// add card to players hand
 					game.getPlayers().get(game.getTurn()).pickCard(c);
@@ -58,7 +59,8 @@ public class SocketHandler extends Thread {
 					game.nextTurn();
 
 					sendScreenShot(false, true);
-				} else if (message.equals("UNO")) {
+					break;
+				case "UNO":
 					String numPlayer = scanner.next();
 					Player p2 = game.getPlayers().get(
 							Integer.parseInt(numPlayer));
@@ -84,17 +86,18 @@ public class SocketHandler extends Thread {
 							}
 						}
 					}
-				} else if (message.equals("PLAY_CARD")) {
+					break;
+				case "PLAY_CARD":
 					String color = scanner.next();
 					String number = scanner.next();
 
-					Card c = new Card(stringToColor(color),
+					Card c1 = new Card(stringToColor(color),
 							Integer.parseInt(number));
 
-					game.getPlayers().get(game.getTurn()).removeCardFromHand(c);
+					game.getPlayers().get(game.getTurn()).removeCardFromHand(c1);
 					sendScreenShot(false, false);
 
-					game.getPlayingPile().push(c);
+					game.getPlayingPile().push(c1);
 
 					if(game.getPlayers().get(game.getTurn()).getNumCardsInHand() == 0){
 						game.setWinner(game.getTurn());
@@ -139,22 +142,22 @@ public class SocketHandler extends Thread {
 					}
 
 					sendScreenShot(true, false);
-					
-
-				} else {
+					break;
+				case "NEWPLAYER":
 					if(game.getNUM_PLAYERS() <= MAX_PLAYERS - 1){
-					game.addPlayer(scanner.next());
+						game.addPlayer(scanner.next());
 
-					// send screen shot of last player that joined
-					Player p2 = game.getPlayers().get(
-							game.getPlayers().size() - 1);
-					shot = getScreenShotData(p2);
-					messages.add(shot);
-					sendScreenShot(false, false);
-					
-					}
+						// send screen shot of last player that joined
+						Player p3 = game.getPlayers().get(
+								game.getPlayers().size() - 1);
+						shot = getScreenShotData(p3);
+						messages.add(shot);
+						sendScreenShot(false, false);
+						
+						}
+					break;
 				}
-
+				
 			}
 
 		} catch (Exception e) {
@@ -192,7 +195,6 @@ public class SocketHandler extends Thread {
 				return colors[i];
 			}
 		}
-		System.out.println("null card");
 		return null;
 	}
 

@@ -249,7 +249,6 @@ public class Game {
 		}
 		players.add(p);
 		NUM_PLAYERS++;
-		//System.out.println("PLAYER ADDED: " + p.toString());
 	}
 
 	public Player getPlayer(String name) {

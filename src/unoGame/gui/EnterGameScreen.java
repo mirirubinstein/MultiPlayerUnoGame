@@ -74,8 +74,7 @@ public class EnterGameScreen extends JFrame {
 				
 				message.setText("Game has max number of players,");
 				message2.setText("unable to join game.");
-				
-				
+								
 			}
 		});
 		setVisible(true);
