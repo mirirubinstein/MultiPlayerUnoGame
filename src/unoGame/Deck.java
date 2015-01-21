@@ -71,11 +71,11 @@ public class Deck {
 				// couldn't pop
 			}
 		}
-		try {
-			card = cards.remove(cards.size() - 1);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			// stop user from dealing card from deck
+		if (cards.size() == 0) {
+			return null;
 		}
+		card = cards.remove(cards.size() - 1);
+
 		return card;
 
 	}
@@ -85,13 +85,11 @@ public class Deck {
 			while (pile.getElements().size() > 1) {
 				cards.add(pile.pop());
 			}
-		} else {
-			// stop user from dealing card from deck
 		}
 	}
 
 	public boolean isEmpty() {
-		// cant wait till its 0 in case someone has a draw 4
+		// can't wait till its 0 in case someone has a draw 4
 		return cards.size() <= 4;
 	}
 

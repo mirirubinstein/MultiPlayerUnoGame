@@ -22,8 +22,7 @@ public class SocketHandler extends Thread {
 	private Game game;
 	private int MAX_PLAYERS = 5;
 
-	public SocketHandler(SocketInStream socket, SocketEventListener listener,
-			Queue<Object> messages, Game game) {
+	public SocketHandler(SocketInStream socket, SocketEventListener listener, Queue<Object> messages, Game game) {
 		this.s = socket;
 		this.messages = messages;
 		this.listener = listener;
@@ -34,59 +33,58 @@ public class SocketHandler extends Thread {
 	public void run() {
 
 		try {
-		
+
 			ObjectInputStream objectIn = s.getIn();
 
 			String line;
 			Player p;
 			ScreenShot shot;
 			Scanner scanner;
-			
-			while ((line = (String) objectIn.readObject()) != null && !game.isGameOver() && game.getNUM_PLAYERS() <= MAX_PLAYERS - 1) {
+
+			while ((line = (String) objectIn.readObject()) != null && !game.isGameOver()
+					&& game.getNUM_PLAYERS() <= MAX_PLAYERS - 1) {
 				listener.onMessage(s.getSocket(), line);
-				Player currentPlayer =null;
-				try{
-				currentPlayer = game.getPlayers().get(game.getTurn());
-				}catch(Exception e){
-					
+				Player currentPlayer = null;
+				try {
+					currentPlayer = game.getPlayers().get(game.getTurn());
+				} catch (Exception e) {
+
 				}
 				scanner = new Scanner(line);
 				String message = scanner.next();
-				
-				switch(message){
+
+				switch (message) {
 				case "DRAW":
 					Card c = game.getDeck().dealCard(game.getPlayingPile());
+					if (c == null) {
+						break;// can't deal card because deck is empty, don't do
+						// anything
+					}
 					// add card to players hand
+
 					game.getPlayers().get(game.getTurn()).pickCard(c);
 					game.getPlayers().get(game.getTurn()).setCalledUno(false);
-					// need to refresh screen data
 					sendScreenShot(false, false, null, false);
-					Player current1= game.getPlayers().get(game.getTurn());
+					Player current1 = game.getPlayers().get(game.getTurn());
 					game.nextTurn();
 
 					sendScreenShot(false, true, current1, false);
 					break;
 				case "UNO":
 					String numPlayer = scanner.next();
-					Player p2 = game.getPlayers().get(
-							Integer.parseInt(numPlayer));
-					
+					Player p2 = game.getPlayers().get(Integer.parseInt(numPlayer));
+
 					if (p2.getNumCardsInHand() == 1) {
 						p2.callUno();
 					} else {
 						List<Player> allPlayers = game.getPlayers();
 						for (int i = 0; i < allPlayers.size(); i++) {
-							if (allPlayers.get(i).getNumCardsInHand() == 1
-									&& !allPlayers.get(i).getCalledUno()) {
+							if (allPlayers.get(i).getNumCardsInHand() == 1 && !allPlayers.get(i).getCalledUno()) {
 								int currentTurn = game.getTurn();
-								allPlayers.get(i).pickCard(
-										game.getDeck().dealCard(
-												game.getPlayingPile()));
-								allPlayers.get(i).pickCard(
-										game.getDeck().dealCard(
-												game.getPlayingPile()));
+								allPlayers.get(i).pickCard(game.getDeck().dealCard(game.getPlayingPile()));
+								allPlayers.get(i).pickCard(game.getDeck().dealCard(game.getPlayingPile()));
 								game.setTurn(i);
-								sendScreenShot(false, false, null,false);
+								sendScreenShot(false, false, null, false);
 								game.setTurn(currentTurn);
 								sendScreenShot(false, false, null, false);
 							}
@@ -97,20 +95,19 @@ public class SocketHandler extends Thread {
 					String color = scanner.next();
 					String number = scanner.next();
 
-					Card c1 = new Card(stringToColor(color),
-							Integer.parseInt(number));
+					Card c1 = new Card(stringToColor(color), Integer.parseInt(number));
 
 					game.getPlayers().get(game.getTurn()).removeCardFromHand(c1);
 					sendScreenShot(false, false, null, false);
 
 					game.getPlayingPile().push(c1);
 
-					if(game.getPlayers().get(game.getTurn()).getNumCardsInHand() == 0){
+					if (game.getPlayers().get(game.getTurn()).getNumCardsInHand() == 0) {
 						game.setWinner(game.getTurn());
 						game.setGameOver(true);
-						//send info to action panel
+						// send info to action panel
 					}
-					int switcher =Integer.parseInt(number);
+					int switcher = Integer.parseInt(number);
 					switch (switcher) {
 
 					case 10:// skip next turn
@@ -147,34 +144,30 @@ public class SocketHandler extends Thread {
 						game.setNextPlayerSkip(false);
 						break;
 					}
-					
-					
-					Boolean calledUno =false;
-					for(Player player: game.getPlayers()){
-						if(player.getCalledUno()){
-							calledUno= true;
+
+					Boolean calledUno = false;
+					for (Player player : game.getPlayers()) {
+						if (player.getCalledUno()) {
+							calledUno = true;
 						}
 					}
 					sendScreenShot(true, false, currentPlayer, calledUno);
-					
-						
-					
+
 					break;
 				case "NEWPLAYER":
-					if(game.getNUM_PLAYERS() <= MAX_PLAYERS - 1){
+					if (game.getNUM_PLAYERS() <= MAX_PLAYERS - 1) {
 						game.addPlayer(scanner.next());
 
 						// send screen shot of last player that joined
-						Player p3 = game.getPlayers().get(
-								game.getPlayers().size() - 1);
+						Player p3 = game.getPlayers().get(game.getPlayers().size() - 1);
 						shot = getScreenShotData(p3);
 						messages.add(shot);
 						sendScreenShot(false, false, null, false);
-						
-						}
+
+					}
 					break;
 				}
-				
+
 			}
 
 		} catch (Exception e) {
@@ -186,7 +179,7 @@ public class SocketHandler extends Thread {
 
 	private ScreenShot getScreenShotData(Player p) throws EmptyPileException {
 		ScreenShot s = new ScreenShot();
-		s.setMyCards( p.getHand()) ;
+		s.setMyCards(p.getHand());
 		s.setCurrentPlayerIndex(game.getTurn());
 		s.setTopCard(game.getPlayingPile().peek());
 		s.setInAscendingOrder(game.isReverse());
@@ -195,8 +188,8 @@ public class SocketHandler extends Thread {
 		ArrayList<Player> players = game.getPlayers();
 		PlayerBasicInfo[] list = new PlayerBasicInfo[players.size()];
 		for (int i = 0; i < players.size(); i++) {
-			list[i] = new PlayerBasicInfo(players.get(i).getName(), players
-					.get(i).getNumCardsInHand(), players.get(i).getCalledUno());
+			list[i] = new PlayerBasicInfo(players.get(i).getName(), players.get(i).getNumCardsInHand(), players.get(i)
+					.getCalledUno());
 		}
 		s.setPlayersInfo(list);
 		return s;
@@ -204,8 +197,7 @@ public class SocketHandler extends Thread {
 
 	public CardColor stringToColor(String c) {
 		String names[] = { "BLACK", "BLUE", "GREEN", "RED", "YELLOW" };
-		CardColor colors[] = { CardColor.BLACK, CardColor.BLUE,
-				CardColor.GREEN, CardColor.RED, CardColor.YELLOW };
+		CardColor colors[] = { CardColor.BLACK, CardColor.BLUE, CardColor.GREEN, CardColor.RED, CardColor.YELLOW };
 
 		for (int i = 0; i < names.length; i++) {
 			if (c.equals(names[i])) {
