@@ -44,9 +44,15 @@ public class SocketHandler extends Thread {
 			
 			while ((line = (String) objectIn.readObject()) != null && !game.isGameOver() && game.getNUM_PLAYERS() <= MAX_PLAYERS - 1) {
 				listener.onMessage(s.getSocket(), line);
-
+				Player currentPlayer =null;
+				try{
+				currentPlayer = game.getPlayers().get(game.getTurn());
+				}catch(Exception e){
+					
+				}
 				scanner = new Scanner(line);
 				String message = scanner.next();
+				
 				switch(message){
 				case "DRAW":
 					Card c = game.getDeck().dealCard(game.getPlayingPile());
@@ -54,11 +60,11 @@ public class SocketHandler extends Thread {
 					game.getPlayers().get(game.getTurn()).pickCard(c);
 					game.getPlayers().get(game.getTurn()).setCalledUno(false);
 					// need to refresh screen data
-					sendScreenShot(false, false);
-
+					sendScreenShot(false, false, null, false);
+					Player current1= game.getPlayers().get(game.getTurn());
 					game.nextTurn();
 
-					sendScreenShot(false, true);
+					sendScreenShot(false, true, current1, false);
 					break;
 				case "UNO":
 					String numPlayer = scanner.next();
@@ -80,9 +86,9 @@ public class SocketHandler extends Thread {
 										game.getDeck().dealCard(
 												game.getPlayingPile()));
 								game.setTurn(i);
-								sendScreenShot(false, false);
+								sendScreenShot(false, false, null,false);
 								game.setTurn(currentTurn);
-								sendScreenShot(false, false);
+								sendScreenShot(false, false, null, false);
 							}
 						}
 					}
@@ -95,7 +101,7 @@ public class SocketHandler extends Thread {
 							Integer.parseInt(number));
 
 					game.getPlayers().get(game.getTurn()).removeCardFromHand(c1);
-					sendScreenShot(false, false);
+					sendScreenShot(false, false, null, false);
 
 					game.getPlayingPile().push(c1);
 
@@ -104,13 +110,13 @@ public class SocketHandler extends Thread {
 						game.setGameOver(true);
 						//send info to action panel
 					}
-
-					switch (Integer.parseInt(number)) {
+					int switcher =Integer.parseInt(number);
+					switch (switcher) {
 
 					case 10:// skip next turn
 						game.setNextPlayerSkip(true);
 						game.nextTurn();
-						sendScreenShot(false, false);
+						sendScreenShot(false, false, null, false);
 						game.setNextPlayerSkip(false);
 						break;
 					case 11:// reverse
@@ -120,7 +126,7 @@ public class SocketHandler extends Thread {
 					case 12:// draw 2
 						game.draw(2);
 						game.nextTurn();
-						sendScreenShot(true, false);
+						sendScreenShot(false, false, null, false);
 						game.nextTurn();
 						game.setNextPlayerSkip(false);
 						break;
@@ -128,7 +134,7 @@ public class SocketHandler extends Thread {
 						int currentTurn = game.getTurn();
 						game.draw(4);
 						game.nextTurn();
-						sendScreenShot(true, false);
+						sendScreenShot(false, false, null, false);
 						game.setTurn(currentTurn);
 						game.setNextPlayerSkip(true);
 						break;
@@ -136,12 +142,23 @@ public class SocketHandler extends Thread {
 						// nothing, go again
 						break;
 					default:
+						currentPlayer = game.getPlayers().get(game.getTurn());
 						game.nextTurn();
 						game.setNextPlayerSkip(false);
 						break;
 					}
-
-					sendScreenShot(true, false);
+					
+					
+					Boolean calledUno =false;
+					for(Player player: game.getPlayers()){
+						if(player.getCalledUno()){
+							calledUno= true;
+						}
+					}
+					sendScreenShot(true, false, currentPlayer, calledUno);
+					
+						
+					
 					break;
 				case "NEWPLAYER":
 					if(game.getNUM_PLAYERS() <= MAX_PLAYERS - 1){
@@ -152,7 +169,7 @@ public class SocketHandler extends Thread {
 								game.getPlayers().size() - 1);
 						shot = getScreenShotData(p3);
 						messages.add(shot);
-						sendScreenShot(false, false);
+						sendScreenShot(false, false, null, false);
 						
 						}
 					break;
@@ -198,12 +215,14 @@ public class SocketHandler extends Thread {
 		return null;
 	}
 
-	public void sendScreenShot(boolean played, boolean draw)
+	public void sendScreenShot(boolean played, boolean draw, Player currentPlayer, boolean calledUno)
 			throws EmptyPileException {
 		Player p = game.getPlayers().get(game.getTurn());
 		ScreenShot shot = getScreenShotData(p);
 		shot.setDrawCard(draw);
 		shot.setPlayedCard(played);
+		shot.setCurrentPlayer(currentPlayer);
+		shot.setCalledUno(calledUno);
 		messages.add(shot);
 	}
 }

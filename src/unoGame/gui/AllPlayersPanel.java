@@ -39,6 +39,7 @@ public class AllPlayersPanel extends JPanel {
 		add(direction);
 		setSize(150, 150);
 		setVisible(true);
+		setOpaque(false);
 
 	}
 

@@ -31,16 +31,13 @@ public class UpdatesPanel extends JPanel {
 		logPanel.add(text);
 		add(scrollPane);
 		setVisible(true);
+		setOpaque(false);
 
 	}
 
 	public void update(String player, String card) {
 		if (updates.size() == 0|| !updates.get(updates.size() - 1).equals(player + " played " + card)) {
-			if (card.contains("DRAW") && updates.get(0).contains("DRAW")) {
-
-			} else {
 				updates.add(0, player + "\nmove: \n" + card + "\n");
-			}
 		}
 		StringBuilder sb = new StringBuilder();
 		for (String update : updates) {

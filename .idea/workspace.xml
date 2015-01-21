@@ -1,17 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0a2ae26-d8d7-461e-a7d8-b779bd035764" name="Default" comment="Changed the updates panel to have the newest played card on top, switched a bunch of other stuff">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/Card.java" afterPath="$PROJECT_DIR$/src/unoGame/Card.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/EnterGameScreen.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/EnterGameScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MultiPlayerUnoGame.iml" afterPath="$PROJECT_DIR$/MultiPlayerUnoGame.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/PickCardsPanel.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/PickCardsPanel.java" />
+    <list default="true" id="f0a2ae26-d8d7-461e-a7d8-b779bd035764" name="Default" comment="fixed bugs in updates panel">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/schwimmer/multichat/MessageSenderThread.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/schwimmer/multichat/MultiChatServer.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/schwimmer/multichat/ServerLogFrame.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/schwimmer/multichat/SocketEventListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/schwimmer/multichat/SocketHandler.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/schwimmer/multichat/SocketInStream.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/schwimmer/multichat/SocketOutStream.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/Card.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/CardColor.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/CardPile.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/Deck.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/EmptyPileException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/Game.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/InvalidMoveException.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/ListeningThread.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/Main.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/Player.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/PlayerBasicInfo.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/AllPlayersPanel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/EnterGameScreen$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/EnterGameScreen.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/OtherPlayerActionListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/PickCardsActionListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/PickCardsPanel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/PlayCardActionListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/PlayersCardsPanel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/Screen.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/TopCardPanel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/UnoActionListener.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/gui/UpdatesPanel.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/unoGame/messages/ScreenShot.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/.gitignore" afterPath="$PROJECT_DIR$/bin/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/AllPlayersPanel.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/AllPlayersPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/Player.java" afterPath="$PROJECT_DIR$/src/unoGame/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/PlayersCardsPanel.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/PlayersCardsPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/Screen.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/Screen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/messages/ScreenShot.java" afterPath="$PROJECT_DIR$/src/unoGame/messages/ScreenShot.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/schwimmer/multichat/SocketHandler.java" afterPath="$PROJECT_DIR$/src/schwimmer/multichat/SocketHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/TopCardPanel.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/TopCardPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/unoGame/gui/UpdatesPanel.java" afterPath="$PROJECT_DIR$/src/unoGame/gui/UpdatesPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="MultiPlayerUnoGame.iws" />
@@ -36,7 +66,28 @@
     <favorites_list name="MultiPlayerUnoGame" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="SocketHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/schwimmer/multichat/SocketHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2633" max-vertical-offset="3330">
+              <caret line="215" column="5" selection-start-line="215" selection-start-column="5" selection-end-line="215" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Screen.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/unoGame/gui/Screen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.1484716" vertical-offset="1139" max-vertical-offset="1980">
+              <caret line="123" column="13" selection-start-line="123" selection-start-column="13" selection-end-line="123" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Push.Settings">
     <option name="myUpdateMethod" value="REBASE" />
@@ -87,16 +138,16 @@
         <option value="$PROJECT_DIR$/src/unoGame/gui/PickCardsActionListner.java" />
         <option value="$PROJECT_DIR$/src/unoGame/gui/PlayCardActionListener.java" />
         <option value="$PROJECT_DIR$/src/unoGame/gui/UnoActionListener.java" />
-        <option value="$PROJECT_DIR$/src/unoGame/gui/PlayersCardsPanel.java" />
         <option value="$PROJECT_DIR$/src/unoGame/gui/PickCardsActionListener.java" />
         <option value="$PROJECT_DIR$/src/unoGame/gui/OtherPlayerActionListener.java" />
         <option value="$PROJECT_DIR$/src/unoGame/gui/EnterGameScreen.java" />
-        <option value="$PROJECT_DIR$/src/unoGame/gui/UpdatesPanel.java" />
-        <option value="$PROJECT_DIR$/src/unoGame/gui/AllPlayersPanel.java" />
-        <option value="$PROJECT_DIR$/src/unoGame/gui/Screen.java" />
         <option value="$PROJECT_DIR$/src/unoGame/gui/PickCardsPanel.java" />
-        <option value="$PROJECT_DIR$/src/unoGame/ListeningThread.java" />
         <option value="$USER_HOME$/Downloads/MultiPlayerUnoGame-master 3/src/unoGame/ListeningThread.java" />
+        <option value="$PROJECT_DIR$/src/unoGame/gui/AllPlayersPanel.java" />
+        <option value="$PROJECT_DIR$/src/unoGame/gui/PlayersCardsPanel.java" />
+        <option value="$PROJECT_DIR$/src/unoGame/gui/UpdatesPanel.java" />
+        <option value="$PROJECT_DIR$/src/unoGame/ListeningThread.java" />
+        <option value="$PROJECT_DIR$/src/unoGame/gui/Screen.java" />
       </list>
     </option>
   </component>
@@ -104,6 +155,22 @@
     <option name="y" value="22" />
     <option name="width" value="1440" />
     <option name="height" value="794" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -128,7 +195,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -150,6 +216,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -164,6 +231,11 @@
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="options.lastSelected" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -284,19 +356,6 @@
       </ExternalSystemSettings>
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -323,6 +382,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -398,6 +470,9 @@
       <AnalysisUIOptions />
     </option>
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="f0a2ae26-d8d7-461e-a7d8-b779bd035764" name="Default" comment="" />
@@ -441,7 +516,13 @@
       <option name="project" value="LOCAL" />
       <updated>1421710203164</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Changed the updates panel to have the newest played card on top, switched a bunch of other stuff">
+      <created>1421710286608</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1421710286608</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -452,26 +533,26 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32965517" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32965517" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32965517" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32965517" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23402777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3048276" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.175" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24165824" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3048276" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -485,19 +566,19 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18819444" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30620688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30620688" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -557,10 +638,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34157303" vertical-offset="14008" max-vertical-offset="59310">
           <caret line="1012" column="16" selection-start-line="1012" selection-start-column="16" selection-end-line="1012" selection-end-column="16" />
-          <folding>
-            <element signature="e#36307#36308#0" expanded="true" />
-            <element signature="e#36342#36343#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -578,26 +655,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/unoGame/messages/UnoMessageFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/schwimmer/multichat/SocketHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2633" max-vertical-offset="3330">
+          <caret line="215" column="5" selection-start-line="215" selection-start-column="5" selection-end-line="215" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/unoGame/ListeningThread.java">
+    <entry file="file://$PROJECT_DIR$/src/unoGame/gui/Screen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1812227" vertical-offset="457" max-vertical-offset="915">
-          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/unoGame/messages/ScreenShot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22925764" vertical-offset="60" max-vertical-offset="1755">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        <state vertical-scroll-proportion="1.1484716" vertical-offset="1139" max-vertical-offset="1980">
+          <caret line="123" column="13" selection-start-line="123" selection-start-column="13" selection-end-line="123" selection-end-column="13" />
           <folding />
         </state>
       </provider>

@@ -69,8 +69,9 @@ public class Screen extends JFrame{
         add(topCardPanel);
         add(pickCardsPanel, BorderLayout.CENTER);
         add(allPlayersPanel);
-        add(playersCardsPanel, BorderLayout.SOUTH);
         add(updatesPanel, BorderLayout.EAST);
+        add(playersCardsPanel, BorderLayout.SOUTH);
+        
         setVisible(true);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
@@ -95,11 +96,15 @@ public class Screen extends JFrame{
             
             
             if(screenShot.isDrawCard()){
-            	updatesPanel.update(player.getText().split("'")[0], "drew a card");
+            	updatesPanel.update(screenShot.getCurrentPlayer().getName(), "drew a card");
             }
             if(screenShot.isPlayedCard()){
-            	updatesPanel.update(player.getText().split("'")[0], screenShot.getTopCard().toUpdatesString());
+            	updatesPanel.update(screenShot.getCurrentPlayer().getName(), screenShot.getTopCard().toUpdatesString());
             }
+            if(screenShot.isCalledUno()){
+            	updatesPanel.update("Someone", "uno");
+            }
+            
             
             player.setText(screenShot.getPlayersInfo()[screenShot.getCurrentPlayerIndex()].getName() + "\'s turn");
         }else{
@@ -109,10 +114,13 @@ public class Screen extends JFrame{
             playersCardsPanel.enableCards(isMyTurn);
             
             if(screenShot.isDrawCard()){
-            	updatesPanel.update(player.getText().split("'")[0], "drew a card");
+            	updatesPanel.update(screenShot.getCurrentPlayer().getName(), "drew a card");
             }
             if(screenShot.isPlayedCard()){
-            	updatesPanel.update(player.getText().split("'")[0], screenShot.getTopCard().toUpdatesString());
+            	updatesPanel.update(screenShot.getCurrentPlayer().getName(), screenShot.getTopCard().toUpdatesString());
+            }
+            if(screenShot.isCalledUno()){
+                updatesPanel.update("Someone", "uno");
             }
             
             player.setText(screenShot.getPlayersInfo()[screenShot.getCurrentPlayerIndex()].getName() + "\'s turn");

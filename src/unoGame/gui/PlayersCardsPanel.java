@@ -30,6 +30,7 @@ public class PlayersCardsPanel extends JPanel {
         this.socket = socket;
         this.screenShot = screenShot; 
         setCards(screenShot.getMyCards(), screenShot.getTopCard());
+        setOpaque(false);
         
         
         

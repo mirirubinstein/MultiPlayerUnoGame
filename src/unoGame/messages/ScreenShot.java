@@ -4,6 +4,7 @@ package unoGame.messages;
 
 import unoGame.Card;
 import unoGame.CardColor;
+import unoGame.Player;
 import unoGame.PlayerBasicInfo;
 
 import java.io.Serializable;
@@ -19,10 +20,35 @@ public class ScreenShot implements Serializable {
 	private int myPlayerIndex;   
 	private boolean playedCard;
 	private boolean drawCard;
+	private boolean calledUno;
+	private Player currentPlayer;
     
     
 	public ScreenShot() {
 		
+	}
+
+	
+
+	public boolean isCalledUno() {
+		return calledUno;
+	}
+
+
+
+	public void setCalledUno(boolean calledUno) {
+		this.calledUno = calledUno;
+	}
+
+
+
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+
+	public void setCurrentPlayer(Player currentPlayer) {
+		this.currentPlayer = currentPlayer;
 	}
 
 
