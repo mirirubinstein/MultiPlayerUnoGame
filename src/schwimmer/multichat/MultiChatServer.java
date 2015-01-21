@@ -21,7 +21,7 @@ public class MultiChatServer {
 	private MessageSenderThread sender;
 	private SocketEventListener listener;
 	private Game game;
-	
+
 	public MultiChatServer(int port, SocketEventListener listener) throws IOException, EmptyPileException {
 		serverSocket = new ServerSocket(port);
 		sockets = new ArrayList<SocketOutStream>();
@@ -31,8 +31,8 @@ public class MultiChatServer {
 		sender.start();
 		this.listener = listener;
 		listener.onServerStart(serverSocket);
-	
-	} 
+
+	}
 
 	public void run() {
 
@@ -40,8 +40,8 @@ public class MultiChatServer {
 			while (true) {
 				Socket socket = serverSocket.accept();
 				sockets.add(new SocketOutStream(socket, new ObjectOutputStream(socket.getOutputStream())));
-				SocketHandler handler = new SocketHandler(
-						new SocketInStream(socket, new ObjectInputStream(socket.getInputStream())), listener, messages, game);
+				SocketHandler handler = new SocketHandler(new SocketInStream(socket, new ObjectInputStream(
+						socket.getInputStream())), listener, messages, game);
 				handler.start();
 			}
 		} catch (IOException e) {

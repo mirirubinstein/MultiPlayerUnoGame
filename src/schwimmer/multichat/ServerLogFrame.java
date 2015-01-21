@@ -17,26 +17,24 @@ public class ServerLogFrame extends JFrame implements SocketEventListener {
 	private JTextArea area;
 
 	public ServerLogFrame(String title) {
-		setSize(200,200);
-		//setSize(800,600);
+		setSize(800, 600);
 		setTitle(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		area = new JTextArea();
-		// http://stackoverflow.com/questions/9000649/automatically-scroll-to-the-bottom-of-a-text-area
 		DefaultCaret caret = (DefaultCaret) area.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-		
+
 		setLayout(new BorderLayout());
 		add(new JScrollPane(area), BorderLayout.CENTER);
-		
+
 	}
 
 	public JTextArea getArea() {
 		return area;
 	}
-	
-	public void append( String text ) {
+
+	public void append(String text) {
 		area.append(text);
 		area.append("\n");
 	}
@@ -60,7 +58,7 @@ public class ServerLogFrame extends JFrame implements SocketEventListener {
 		append("SERVER START " + serverSocket.getLocalPort());
 	}
 
-	public static void main( String args[] ) throws IOException, EmptyPileException {
+	public static void main(String args[]) throws IOException, EmptyPileException {
 		ServerLogFrame frame = new ServerLogFrame("Server");
 		frame.setVisible(true);
 		MultiChatServer server = new MultiChatServer(3773, frame);
@@ -69,9 +67,7 @@ public class ServerLogFrame extends JFrame implements SocketEventListener {
 
 	@Override
 	public void onMessage(Socket socket, Object message) {
-		// TODO Auto-generated method stub
 		append(socket.getInetAddress().toString() + " " + message);
 	}
 
-	
 }

@@ -15,7 +15,6 @@ import unoGame.PlayerBasicInfo;
 
 public class AllPlayersPanel extends JPanel {
 
-	// UI components
 	private JPanel players = new JPanel();
 	private JLabel direction = new JLabel();
 	private JScrollPane scrollPane = new JScrollPane();
@@ -66,39 +65,36 @@ public class AllPlayersPanel extends JPanel {
 		if (info.length == playerButtons.size()) {
 			for (int i = 0; i < playerButtons.size(); i++) {
 				playerButtons.get(i).setText(info[i].name + " : " + info[i].cardsInHand);
-				if(i != currentPlayerIndex){
+				if (i != currentPlayerIndex) {
 					playerButtons.get(i).setBackground(Color.WHITE);
-				}else{
+				} else {
 					playerButtons.get(i).setBackground(Color.PINK);
 				}
 			}
-		}
-		else{
+		} else {
 			for (int i = 0; i < playerButtons.size(); i++) {
 				playerButtons.get(i).setText(info[i].name + " : " + info[i].cardsInHand);
-				if(i != currentPlayerIndex){
+				if (i != currentPlayerIndex) {
 					playerButtons.get(i).setBackground(Color.WHITE);
-				}else{
+				} else {
 					playerButtons.get(i).setBackground(Color.PINK);
 				}
 			}
-			for (int i = playerButtons.size(); i < info.length ; i++) {
+			for (int i = playerButtons.size(); i < info.length; i++) {
 				playerButtons.add(new JButton(info[i].name + " : " + info[i].cardsInHand));
 				JButton playerButton = playerButtons.get(playerButtons.size() - 1);
 				playerButton.setPreferredSize(new Dimension(150, 100));
 				playerButton.setFont(new Font("verdana", Font.BOLD, 14));
 				playerButton.addActionListener(otherPlayersActionListener);
 				players.add(playerButton);
-				if(i != currentPlayerIndex){
+				if (i != currentPlayerIndex) {
 					playerButtons.get(i).setBackground(Color.WHITE);
-				}else{
+				} else {
 					playerButtons.get(i).setBackground(Color.PINK);
 				}
 			}
-			
-			
+
 		}
-		// createAllPlayerButtons(info);
 		setDirection(isInAscendingOrder);
 		players.revalidate();
 	}

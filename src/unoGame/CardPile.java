@@ -42,7 +42,8 @@ public class CardPile {
 	public void setElements(List<Card> elements) {
 		this.elements = elements;
 	}
-	public void reset(Card card){
+
+	public void reset(Card card) {
 		elements = new ArrayList<Card>();
 		elements.add(card);
 	}

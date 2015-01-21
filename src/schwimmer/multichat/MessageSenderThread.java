@@ -18,9 +18,7 @@ public class MessageSenderThread extends Thread {
 	private SocketEventListener listener;
 	private Game game;
 
-	public MessageSenderThread(
-			List<SocketOutStream> sockets, 
-			BlockingQueue<Object> messages,
+	public MessageSenderThread(List<SocketOutStream> sockets, BlockingQueue<Object> messages,
 			SocketEventListener listener, Game game) {
 		this.socketStreams = sockets;
 		this.messages = messages;
@@ -30,16 +28,15 @@ public class MessageSenderThread extends Thread {
 
 	public void run() {
 
-		while ( true ) {
+		while (true) {
 
 			try {
 				Object message = messages.take();
 
 				Iterator<SocketOutStream> iter = socketStreams.iterator();
-				while ( iter.hasNext() ) {
+				while (iter.hasNext()) {
 					SocketOutStream socketStream = iter.next();
 					try {
-					//	OutputStream out = socketStream.getOut();
 						ObjectOutputStream objectOut = socketStream.getOut();
 						objectOut.writeObject(message);
 						objectOut.flush();
@@ -53,13 +50,13 @@ public class MessageSenderThread extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 
 	}
-	public Game getGame(){
+
+	public Game getGame() {
 		return game;
 	}
-
 
 }

@@ -17,13 +17,8 @@ public class UpdatesPanel extends JPanel {
 	private JTextArea text = new JTextArea();
 
 	public UpdatesPanel() {
-		// Label activityLabel = new Label("Activity Log");
-		// activityLabel.setFont(new Font("verdana", Font.BOLD, 22));
-		// logPanel.add(activityLabel);
-		scrollPane
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		scrollPane
-				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		logPanel.setVisible(true);
 		scrollPane.getViewport().add(logPanel);
 
@@ -36,8 +31,8 @@ public class UpdatesPanel extends JPanel {
 	}
 
 	public void update(String player, String card) {
-		if (updates.size() == 0|| !updates.get(updates.size() - 1).equals(player + " played " + card)) {
-				updates.add(0, player + "\nmove: \n" + card + "\n");
+		if (updates.size() == 0 || !updates.get(updates.size() - 1).equals(player + " played " + card)) {
+			updates.add(0, player + "\nmove: \n" + card + "\n");
 		}
 		StringBuilder sb = new StringBuilder();
 		for (String update : updates) {

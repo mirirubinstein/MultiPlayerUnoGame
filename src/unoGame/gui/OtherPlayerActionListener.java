@@ -6,13 +6,13 @@ import java.awt.event.ActionListener;
 /**
  * Created by mullman14 on 1/4/15.
  */
-public class OtherPlayerActionListener implements ActionListener{
+public class OtherPlayerActionListener implements ActionListener {
 
-    public OtherPlayerActionListener(){
+	public OtherPlayerActionListener() {
 
-    }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // dont think anything has to happen
-    }
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	}
 }

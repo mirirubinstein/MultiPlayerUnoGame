@@ -21,12 +21,10 @@ import unoGame.ListeningThread;
 import unoGame.messages.ScreenShot;
 
 public class EnterGameScreen extends JFrame {
-	// Socket components
 	Socket socket;
 	ListeningThread thread;
 	SocketOutStream socketStream;
 
-	// UI Components
 	JButton join = new JButton("   Join   ");
 	JLabel master = new JLabel("Master Name :");
 	JLabel playerName = new JLabel("Your Name :");
@@ -59,7 +57,7 @@ public class EnterGameScreen extends JFrame {
 
 	public Screen switchToPlayingGameJFrame(ScreenShot screenShot) {
 		Screen screen = new Screen(screenShot, name.getText(), socketStream);
-		screen.setMyPlayerIndex(screenShot.getPlayersInfo().length-1);
+		screen.setMyPlayerIndex(screenShot.getPlayersInfo().length - 1);
 		setVisible(false);
 		return screen;
 	}
@@ -71,10 +69,10 @@ public class EnterGameScreen extends JFrame {
 				join(masterName.getText(), name.getText());
 				join.setEnabled(false);
 				join.setText("Please wait...");
-				
+
 				message.setText("Game has max number of players,");
 				message2.setText("unable to join game.");
-								
+
 			}
 		});
 		setVisible(true);
@@ -89,21 +87,19 @@ public class EnterGameScreen extends JFrame {
 			thread.start();
 
 			// send player data
-			
+
 			OutputStream outS = socket.getOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(outS);
-			
+
 			socketStream = new SocketOutStream(socket, out);
 			String message = "NEWPLAYER " + playerName.toUpperCase() + "\n";
 			out.writeObject(message);
 			out.flush();// flush the stream so that the data gets sent\
-		
-		
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-	
 	}
 }

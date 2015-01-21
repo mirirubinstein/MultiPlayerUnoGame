@@ -13,7 +13,7 @@ public class ListeningThread extends Thread {
 	private EnterGameScreen screen;
 	private boolean newGame;
 	private Screen playingScreen;
-	
+
 	public ListeningThread(Socket socket, EnterGameScreen screen) {
 		this.socket = socket;
 		this.screen = screen;
@@ -25,25 +25,19 @@ public class ListeningThread extends Thread {
 	public void run() {
 		try {
 
-			// InputStream in = socket.getInputStream();
-			// BufferedReader reader = new BufferedReader(new
-			// InputStreamReader(in));
 			ObjectInputStream s = new ObjectInputStream(socket.getInputStream());
-		
+
 			Object o;
 			ScreenShot ss;
 			Card c;
 			while ((o = (Object) s.readObject()) != null) {
-				ss = (ScreenShot)o;
-				if(newGame){
+				ss = (ScreenShot) o;
+				if (newGame) {
 					playingScreen = screen.switchToPlayingGameJFrame(ss);
 					newGame = false;
-				}
-				else{
+				} else {
 					playingScreen.update(ss);
 				}
-				
-				
 
 			}
 
